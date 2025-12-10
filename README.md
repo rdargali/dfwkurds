@@ -64,8 +64,8 @@ A high-performance, mobile-first, culturally sensitive multilingual website for 
 1. **Clone the repository:**
 
 ```bash
-git clone https://github.com/your-org/dfwkurds-sanity.git
-cd dfwkurds-sanity
+git clone https://github.com/your-org/dfwkurds.git
+cd dfwkurds
 ```
 
 2. **Install dependencies:**
@@ -112,7 +112,7 @@ npm run format:check # Check code formatting
 ## 📁 Project Structure
 
 ```
-dfwkurds-sanity/
+dfwkurds/
 ├── messages/                    # Translation JSON files
 │   ├── en.json                 # English translations
 │   ├── ckb.json                # Sorani Kurdish translations
@@ -278,24 +278,43 @@ Before deploying, you need to generate PWA icons:
 
 ### Vercel (Recommended)
 
-1. **Push to GitHub:**
+**Quick Start:**
 
-```bash
-git add .
-git commit -m "Initial commit"
-git push origin main
-```
+1. **Ensure your code is pushed to GitHub:**
+   ```bash
+   git push origin main
+   ```
 
 2. **Import to Vercel:**
    - Go to [vercel.com/new](https://vercel.com/new)
-   - Import your GitHub repository
-   - Framework will be auto-detected as Next.js
+   - Sign in with your **GitHub account** (important!)
+   - Click **"Import Git Repository"**
+   - Find and select `hanatgit/dfwkurds` repository
+   - Click **"Import"**
 
-3. **Configure Environment Variables:**
+3. **Configure Project Settings:**
+   - **Framework Preset:** Next.js (auto-detected)
+   - **Root Directory:** `./` (default)
+   - **Build Command:** `npm run build` (default)
+   - **Output Directory:** `.next` (default)
+
+4. **Add Environment Variables:**
+   Click **"Environment Variables"** and add:
    - `NEXT_PUBLIC_SANITY_PROJECT_ID` — Your Sanity project ID
    - `NEXT_PUBLIC_SANITY_DATASET` — Usually `production`
+   - `NEXT_PUBLIC_SITE_URL` — (Optional) Your production URL
 
-4. **Deploy!**
+5. **Deploy:**
+   - Click **"Deploy"** button
+   - Wait 2-3 minutes for build to complete
+   - Your site will be live!
+
+**Troubleshooting:**
+- **Can't see the project?** Make sure you're signed in with the GitHub account that owns the repository
+- **Repository not showing?** Check that Vercel has access to your GitHub repositories (Settings → Git → GitHub)
+- **Build fails?** Check the build logs in Vercel dashboard for specific errors
+
+See `VERCEL_DEPLOYMENT.md` for detailed deployment instructions.
 
 ### Other Platforms
 
