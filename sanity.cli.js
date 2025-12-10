@@ -10,10 +10,10 @@
  */
 
 const { defineCliConfig } = require('sanity/cli')
+const path = require('path')
 
 // Load environment variables from .env.local if it exists
 try {
-  const path = require('path')
   const fs = require('fs')
   const envPath = path.resolve(__dirname, '.env.local')
 

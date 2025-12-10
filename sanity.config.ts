@@ -1,9 +1,8 @@
 import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
-import { schemaTypes } from './schemas'
+import { schemaTypes } from './sanity/schemas'
 
 // Sanity Studio configuration
-// Replace these with your actual Sanity project details
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'your-project-id'
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
 
@@ -67,3 +66,4 @@ export default defineConfig({
     types: schemaTypes,
   },
 })
+
