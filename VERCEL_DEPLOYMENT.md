@@ -43,8 +43,9 @@ In the Vercel project settings, add these environment variables:
 - `NEXT_PUBLIC_SANITY_DATASET` - Usually `production`
 
 ### Optional:
-- `NEXT_PUBLIC_SITE_URL` - Your production domain (for sitemap)
+- `NEXT_PUBLIC_SITE_URL` - Your production domain (for sitemap and SEO)
 - `SANITY_API_TOKEN` - If you need authenticated requests
+- `SANITY_APP_ID` - Sanity Studio deployment app ID (prevents prompts on deploy)
 
 **How to add:**
 1. Go to your project in Vercel
@@ -107,14 +108,13 @@ If the build fails, check:
 **Missing Icons:**
 - PWA icons are optional for initial deployment
 - Site will work without them
-- Generate icons later using `scripts/generate-icons.js`
+- Generate icons later using the scripts in the main README
 
 ## Post-Deployment
 
 1. **Update Domain References:**
-   - Update `src/app/sitemap.ts` with your actual domain
-   - Update `public/robots.txt` with your actual domain
-   - Or set `NEXT_PUBLIC_SITE_URL` environment variable
+   - Set `NEXT_PUBLIC_SITE_URL` environment variable in Vercel (recommended)
+   - Or manually update `src/app/sitemap.ts` and `public/robots.txt` with your actual domain
 
 2. **Test the Site:**
    - Visit your deployed URL

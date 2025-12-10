@@ -114,6 +114,16 @@ npm run format       # Format code with Prettier
 npm run format:check # Check code formatting
 ```
 
+### Icon Generation Scripts
+
+```bash
+# Generate source icon (512x512) from Kurdish Sun logo
+node scripts/generate-source-icon.js
+
+# Generate all PWA icon sizes from source icon
+node scripts/generate-icons.js
+```
+
 ## 📁 Project Structure
 
 ```
@@ -156,6 +166,8 @@ dfwkurds/
 │   └── proxy.ts                # Locale detection proxy (Next.js 16)
 ├── next.config.ts              # Next.js configuration
 ├── tailwind.config.ts          # Tailwind configuration
+├── sanity.cli.js               # Sanity CLI configuration (reads from .env.local)
+├── .env.sample                 # Environment variables template
 └── package.json
 ```
 
@@ -217,6 +229,23 @@ The site automatically switches layout direction based on locale:
 sanity deploy
 ```
 
+**Sanity CLI Configuration:**
+
+The project includes `sanity.cli.js` in the root directory that:
+- Automatically loads your project ID from `.env.local`
+- Supports optional `SANITY_APP_ID` to prevent deployment prompts
+- Works with all Sanity CLI commands (`deploy`, `schema`, etc.)
+
+**Optional: Add App ID to prevent deployment prompts**
+
+After your first `sanity deploy`, you'll get an app ID. Add it to `.env.local`:
+
+```env
+SANITY_APP_ID=your-app-id-here
+```
+
+This prevents Sanity from prompting for the application ID on future deploys.
+
 **Troubleshooting Sanity CLI Errors:**
 
 If you get an error: `"sanity.cli.js does not contain a project identifier"`:
@@ -230,16 +259,14 @@ If you get an error: `"sanity.cli.js does not contain a project identifier"`:
 2. **Verify your project ID is set:**
    ```bash
    # Check if the config can read your project ID
-   node -e "require('./sanity.cli.js')"
+   node -e "const config = require('./sanity.cli.js'); console.log('Project ID:', config.api.projectId);"
    ```
 
 3. **Restart your terminal** after creating/updating `.env.local`
 
 4. **Ensure `sanity.cli.js` exists** in the project root: `./sanity.cli.js`
 
-The `sanity.cli.js` file in the root automatically loads your project ID from `.env.local`.
-
-**Note:** The `sanity.cli.js` file will automatically read your project ID from `.env.local`. Make sure you've created `.env.local` with your Sanity project ID before running Sanity CLI commands.
+The `sanity.cli.js` file automatically loads your project ID and dataset from `.env.local`.
 
 ### Content Types
 
@@ -267,23 +294,29 @@ This website is a Progressive Web App, allowing users to install it on their dev
 
 Before deploying, you need to generate PWA icons:
 
-1. **Create a source image:**
-   - Create a 512x512px PNG image with the Kurdish Sun symbol
-   - Save it as `public/icon-source.png`
+1. **Generate the source icon:**
+   
+   The source icon is automatically generated from the Kurdish Sun logo:
+   
+   ```bash
+   # Generate 512x512 source icon (red background, gold sun)
+   node scripts/generate-source-icon.js
+   ```
+   
+   This creates `public/icon-source.png` with the Kurdish Sun emblem on a red background.
 
-2. **Generate icons:**
+2. **Generate all PWA icon sizes:**
 
    ```bash
-   # Install sharp (if not already installed)
-   npm install --save-dev sharp
-
-   # Generate all icon sizes
+   # Generate all required icon sizes (72, 96, 128, 144, 152, 192, 384, 512)
    node scripts/generate-icons.js
    ```
 
 3. **Verify icons:**
    - Check that all icons are in `public/icons/` directory
    - Sizes: 72, 96, 128, 144, 152, 192, 384, 512 pixels
+
+**Note:** `icon-source.png` is gitignored and won't be committed. The generated icons in `public/icons/` are tracked.
 
 ### Testing PWA
 
@@ -353,7 +386,7 @@ Before deploying, you need to generate PWA icons:
 - **Repository not showing?** Check that Vercel has access to your GitHub repositories (Settings → Git → GitHub)
 - **Build fails?** Check the build logs in Vercel dashboard for specific errors
 
-See `VERCEL_DEPLOYMENT.md` for detailed deployment instructions.
+For detailed deployment instructions, troubleshooting, and CLI deployment options, see [`VERCEL_DEPLOYMENT.md`](./VERCEL_DEPLOYMENT.md).
 
 ### Other Platforms
 
@@ -387,6 +420,7 @@ pm2 start npm --name "dfwkurds" -- start
 | `NEXT_PUBLIC_SANITY_DATASET`    | Yes      | Dataset name (usually `production`)     |
 | `NEXT_PUBLIC_SITE_URL`          | No       | Production site URL for sitemap/SEO     |
 | `SANITY_API_TOKEN`              | No       | Token for authenticated Sanity requests |
+| `SANITY_APP_ID`                 | No       | Sanity Studio deployment app ID (prevents prompts on deploy) |
 
 ### Customization
 
