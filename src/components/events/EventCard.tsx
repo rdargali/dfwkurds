@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import { getLocalizedValue, type Event } from '@/lib/sanity'
 
@@ -154,10 +155,16 @@ export function EventCard({ event, locale, featured = false }: EventCardProps) {
   })()
 
   // Generate share URL with anchor to specific event
-  const generateShareUrl = () => {
-    const baseUrl = window.location.origin + window.location.pathname
-    return `${baseUrl}#event-${eventId}`
-  }
+  // Use state to avoid hydration mismatch with window.location
+  const [shareUrl, setShareUrl] = useState<string>('')
+
+  useEffect(() => {
+    // Only access window on client side after mount
+    if (typeof window !== 'undefined') {
+      const baseUrl = window.location.origin + window.location.pathname
+      setShareUrl(`${baseUrl}#event-${eventId}`)
+    }
+  }, [eventId])
 
   return (
     <article id={`event-${eventId}`} className={`timeline-item ${isPast ? 'opacity-60' : ''}`}>
@@ -305,20 +312,21 @@ export function EventCard({ event, locale, featured = false }: EventCardProps) {
             </a>
             <button
               onClick={async () => {
-                const shareUrl = generateShareUrl()
+                if (!shareUrl) return // Don't share if URL not ready yet
+
                 const shareData = {
                   title: getLocalizedValue(event.title, locale) || '',
                   text: getLocalizedValue(event.description, locale) || '',
                   url: shareUrl,
                 }
 
-                if (navigator.share && navigator.canShare?.(shareData)) {
+                if (typeof navigator !== 'undefined' && navigator.share && navigator.canShare?.(shareData)) {
                   try {
                     await navigator.share(shareData)
                   } catch (err) {
                     // User cancelled or error occurred - silently fail
                   }
-                } else {
+                } else if (typeof navigator !== 'undefined' && navigator.clipboard) {
                   // Fallback: copy URL to clipboard
                   try {
                     await navigator.clipboard.writeText(shareUrl)
@@ -328,6 +336,7 @@ export function EventCard({ event, locale, featured = false }: EventCardProps) {
                   }
                 }
               }}
+              disabled={!shareUrl}
               className="btn bg-slate-100 hover:bg-slate-200 text-slate-700 btn-touch"
               title={locale === 'ckb' ? 'هاوبەشکردن' : locale === 'kmr' ? 'Parve bike' : 'Share'}
             >

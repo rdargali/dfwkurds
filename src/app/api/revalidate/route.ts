@@ -117,31 +117,48 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Allow GET for testing (without secret in development)
+// Allow GET for manual revalidation (with secret in production)
 export async function GET(request: NextRequest) {
-  if (process.env.NODE_ENV === 'development') {
-    const searchParams = request.nextUrl.searchParams
-    const path = searchParams.get('path')
+  const searchParams = request.nextUrl.searchParams
+  const path = searchParams.get('path')
+  const secret = searchParams.get('secret')
+  const expectedSecret = process.env.REVALIDATE_SECRET
 
-    if (path) {
-      revalidatePath(path)
-      return NextResponse.json({
-        revalidated: true,
-        path,
-        timestamp: new Date().toISOString(),
-      })
+  // In development, allow without secret
+  // In production, require secret
+  if (process.env.NODE_ENV === 'production') {
+    if (!expectedSecret) {
+      return NextResponse.json(
+        { error: 'Revalidation not configured' },
+        { status: 500 }
+      )
     }
+    if (secret !== expectedSecret) {
+      return NextResponse.json(
+        { error: 'Invalid secret. Use ?secret=YOUR_SECRET&path=/en/events' },
+        { status: 401 }
+      )
+    }
+  }
 
+  if (path) {
+    revalidatePath(path)
     return NextResponse.json({
-      message: 'Revalidation endpoint',
-      usage: 'GET /api/revalidate?path=/en/events',
-      note: 'This endpoint is only available in development',
+      revalidated: true,
+      path,
+      timestamp: new Date().toISOString(),
+      message: 'Cache revalidated successfully',
     })
   }
 
-  return NextResponse.json(
-    { error: 'Not available in production' },
-    { status: 403 }
-  )
+  return NextResponse.json({
+    message: 'Revalidation endpoint',
+    usage: process.env.NODE_ENV === 'production'
+      ? 'GET /api/revalidate?secret=YOUR_SECRET&path=/en/events'
+      : 'GET /api/revalidate?path=/en/events',
+    note: process.env.NODE_ENV === 'production'
+      ? 'Requires secret token in production'
+      : 'Available in development without secret',
+  })
 }
 

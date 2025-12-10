@@ -115,8 +115,13 @@ export default async function EventsPage({ params }: { params: Promise<{ locale:
   let events: Event[] = []
   try {
     events = await getSanityData<Event[]>(EVENTS_QUERY)
-  } catch {
-    console.log('Using placeholder events data')
+    // Log for debugging in production
+    if (process.env.NODE_ENV === 'production') {
+      console.log(`[Events] Fetched ${events.length} events from Sanity`)
+    }
+  } catch (error) {
+    console.error('[Events] Error fetching from Sanity:', error)
+    console.log('[Events] Using placeholder events data')
   }
 
   // Use placeholder if no data
