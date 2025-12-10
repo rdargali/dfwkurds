@@ -5,11 +5,15 @@ import { createImageUrlBuilder } from '@sanity/image-url'
 type SanityImageSource = any
 
 // Sanity client configuration
+// In development, disable CDN to see fresh data immediately
+// In production, use CDN for better performance
+const isDevelopment = process.env.NODE_ENV === 'development'
+
 export const sanityClient = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'your-project-id',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   apiVersion: '2024-01-01',
-  useCdn: true, // Use CDN for faster responses in production
+  useCdn: !isDevelopment, // Disable CDN in development for immediate updates
 })
 
 // Image URL builder
@@ -27,8 +31,13 @@ export async function getSanityData<T>(
 ): Promise<T> {
   return sanityClient.fetch<T>(query, params ?? {}, {
     // Use Next.js cache with revalidation
+    // In development, use shorter revalidation (10 seconds) for faster updates
+    // In production, use shorter revalidation (30 seconds) for faster content updates
+    // On-demand revalidation via webhook is preferred for immediate updates
     next: {
-      revalidate: 60, // Revalidate every 60 seconds
+      revalidate: isDevelopment ? 10 : 30,
+      // Add cache tags for better cache control
+      tags: ['sanity-data'],
     },
   })
 }

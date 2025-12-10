@@ -3,8 +3,19 @@ import { structureTool } from 'sanity/structure'
 import { schemaTypes } from './sanity/schemas'
 
 // Sanity Studio configuration
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'your-project-id'
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
+// Sanity automatically loads .env files and exposes variables with SANITY_STUDIO_ prefix
+// For compatibility with Next.js, we also check NEXT_PUBLIC_SANITY_PROJECT_ID
+const projectId =
+  process.env.SANITY_STUDIO_PROJECT_ID || process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'your-project-id'
+const dataset =
+  process.env.SANITY_STUDIO_DATASET || process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
+
+// Validate project ID
+if (projectId === 'your-project-id') {
+  console.warn(
+    '⚠️  Warning: Project ID is not set. Please set SANITY_STUDIO_PROJECT_ID or NEXT_PUBLIC_SANITY_PROJECT_ID in your .env file.'
+  )
+}
 
 export default defineConfig({
   name: 'dfwkurds',

@@ -35,13 +35,16 @@ try {
 }
 
 // Get project ID and dataset from environment variables
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'your-project-id'
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
+// Check both SANITY_STUDIO_ (Sanity standard) and NEXT_PUBLIC_ (Next.js compatibility)
+const projectId =
+  process.env.SANITY_STUDIO_PROJECT_ID || process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'your-project-id'
+const dataset =
+  process.env.SANITY_STUDIO_DATASET || process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
 
 // Validate that project ID is set
 if (projectId === 'your-project-id') {
   console.warn(
-    '⚠️  Warning: NEXT_PUBLIC_SANITY_PROJECT_ID is not set. Please create .env.local with your Sanity project ID.'
+    '⚠️  Warning: Project ID is not set. Please set SANITY_STUDIO_PROJECT_ID or NEXT_PUBLIC_SANITY_PROJECT_ID in .env.local'
   )
 }
 

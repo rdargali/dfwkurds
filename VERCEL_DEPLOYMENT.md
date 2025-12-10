@@ -46,6 +46,7 @@ In the Vercel project settings, add these environment variables:
 - `NEXT_PUBLIC_SITE_URL` - Your production domain (for sitemap and SEO)
 - `SANITY_API_TOKEN` - If you need authenticated requests
 - `SANITY_APP_ID` - Sanity Studio deployment app ID (prevents prompts on deploy)
+- `REVALIDATE_SECRET` - Secret token for on-demand cache revalidation (see "On-Demand Revalidation" section below)
 
 **How to add:**
 1. Go to your project in Vercel
@@ -144,6 +145,50 @@ vercel
 # For production deployment
 vercel --prod
 ```
+
+## On-Demand Cache Revalidation
+
+By default, your website caches Sanity content for 30 seconds. To see new content immediately after publishing in Sanity Studio, set up on-demand revalidation:
+
+### Step 1: Generate Secret Token
+
+```bash
+openssl rand -hex 32
+```
+
+Copy the generated token.
+
+### Step 2: Add to Vercel
+
+1. Go to Vercel Dashboard → Your Project → **Settings** → **Environment Variables**
+2. Add `REVALIDATE_SECRET` with the generated token
+3. Apply to **Production**, **Preview**, and **Development**
+4. Click **Save**
+
+### Step 3: Set Up Sanity Webhook
+
+1. Go to [sanity.io/manage](https://www.sanity.io/manage)
+2. Select your project → **API** → **Webhooks**
+3. Click **Create webhook**
+4. Configure:
+   - **Name:** `Revalidate Next.js Cache`
+   - **URL:** `https://your-domain.vercel.app/api/revalidate` (replace with your actual domain)
+   - **Dataset:** `production` (or your dataset name)
+   - **Trigger on:** ✅ Create, ✅ Update, ✅ Delete
+   - **HTTP method:** `POST`
+   - **API version:** `v2021-06-07` or latest
+   - **Secret:** (paste the same token from Step 1)
+   - **Filter:** Leave empty (or use `_type == "event" || _type == "newsPost"` to limit)
+   - **Projections:** Leave empty
+5. Click **Save**
+
+### Step 4: Test
+
+1. Publish or update content in Sanity Studio
+2. Check Vercel function logs (Dashboard → Your Project → **Functions** → `/api/revalidate`)
+3. Your website should update within seconds
+
+**Note:** Without the webhook, new content will appear after 30 seconds or when you manually redeploy.
 
 ---
 

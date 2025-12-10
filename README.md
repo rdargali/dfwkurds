@@ -85,10 +85,16 @@ cp .env.sample .env.local
 Then edit `.env.local` with your Sanity project credentials:
 
 ```env
-# Sanity CMS Configuration
+# For Sanity Studio (automatically loaded by Sanity)
+SANITY_STUDIO_PROJECT_ID=your-project-id
+SANITY_STUDIO_DATASET=production
+
+# For Next.js website (also required)
 NEXT_PUBLIC_SANITY_PROJECT_ID=your-project-id
 NEXT_PUBLIC_SANITY_DATASET=production
 ```
+
+**Note:** Sanity Studio automatically loads `.env` files and exposes variables with the `SANITY_STUDIO_` prefix. The `NEXT_PUBLIC_` variables are used by your Next.js website.
 
 **Where to get your Sanity Project ID:**
 - Go to [sanity.io/manage](https://www.sanity.io/manage)
@@ -112,6 +118,7 @@ npm run start        # Start production server
 npm run lint         # Run ESLint
 npm run format       # Format code with Prettier
 npm run format:check # Check code formatting
+npm run sanity:deploy # Deploy Sanity Studio
 ```
 
 ### Icon Generation Scripts
@@ -218,15 +225,24 @@ The site automatically switches layout direction based on locale:
    ```
    Then edit `.env.local` and add your Project ID:
    ```env
+   # For Sanity Studio (automatically loaded by Sanity)
+   SANITY_STUDIO_PROJECT_ID=your-actual-project-id
+   SANITY_STUDIO_DATASET=production
+   
+   # For Next.js (also needed for the website)
    NEXT_PUBLIC_SANITY_PROJECT_ID=your-actual-project-id
    NEXT_PUBLIC_SANITY_DATASET=production
    ```
 
+   **Note:** Sanity Studio automatically loads `.env` files and exposes variables with the `SANITY_STUDIO_` prefix. The `NEXT_PUBLIC_` variables are used by your Next.js website.
+
 4. **Deploy Sanity Studio (optional):**
 
 ```bash
-# Run from project root (recommended)
+# Run from project root
 sanity deploy
+# Or use the npm script
+npm run sanity:deploy
 ```
 
 **Sanity CLI Configuration:**
@@ -421,6 +437,7 @@ pm2 start npm --name "dfwkurds" -- start
 | `NEXT_PUBLIC_SITE_URL`          | No       | Production site URL for sitemap/SEO     |
 | `SANITY_API_TOKEN`              | No       | Token for authenticated Sanity requests |
 | `SANITY_APP_ID`                 | No       | Sanity Studio deployment app ID (prevents prompts on deploy) |
+| `REVALIDATE_SECRET`             | No       | Secret token for on-demand cache revalidation (see below) |
 
 ### Customization
 
@@ -436,6 +453,42 @@ Edit CSS variables in `src/app/globals.css`
 
 **Adding new pages:**
 Create folder in `src/app/[locale]/` with `page.tsx`
+
+### On-Demand Cache Revalidation
+
+By default, the website caches Sanity content for 30 seconds in production. To see new content immediately after publishing in Sanity Studio, set up on-demand revalidation:
+
+1. **Generate a secret token:**
+   ```bash
+   openssl rand -hex 32
+   ```
+
+2. **Add to Vercel environment variables:**
+   - Go to Vercel Dashboard → Your Project → Settings → Environment Variables
+   - Add `REVALIDATE_SECRET` with the generated token
+   - Apply to **Production**, **Preview**, and **Development** environments
+
+3. **Set up Sanity webhook:**
+   - Go to [sanity.io/manage](https://www.sanity.io/manage)
+   - Select your project → **API** → **Webhooks**
+   - Click **Create webhook**
+   - **Name:** `Revalidate Next.js Cache`
+   - **URL:** `https://your-domain.com/api/revalidate`
+   - **Dataset:** `production` (or your dataset name)
+   - **Trigger on:** ✅ Create, ✅ Update, ✅ Delete
+   - **HTTP method:** `POST`
+   - **API version:** `v2021-06-07` or latest
+   - **Secret:** (same value as `REVALIDATE_SECRET`)
+   - **Filter:** Leave empty (or use `_type == "event" || _type == "newsPost"` to limit)
+   - **Projections:** Leave empty
+   - Click **Save**
+
+4. **Test the webhook:**
+   - Publish or update content in Sanity Studio
+   - Check Vercel function logs to see if revalidation was triggered
+   - Your website should update within seconds
+
+**Note:** Without the webhook, new content will appear after the cache expires (30 seconds) or when you manually redeploy.
 
 ## 📱 Browser Support
 
