@@ -36,23 +36,31 @@ export const teamMember = defineType({
       name: 'bio',
       title: 'Biography',
       type: 'localeText',
+      description: 'Short biography or description of the team member',
     }),
     defineField({
       name: 'email',
       title: 'Email',
       type: 'string',
+      validation: Rule =>
+        Rule.regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, {
+          name: 'email',
+          invert: false,
+        }).error('Please enter a valid email address'),
     }),
     defineField({
       name: 'linkedin',
       title: 'LinkedIn URL',
       type: 'url',
+      description: 'Full LinkedIn profile URL',
     }),
     defineField({
       name: 'order',
       title: 'Display Order',
       type: 'number',
-      description: 'Lower numbers appear first',
+      description: 'Lower numbers appear first in the team list',
       initialValue: 100,
+      validation: Rule => Rule.required().integer().min(0),
     }),
   ],
   preview: {
@@ -63,7 +71,7 @@ export const teamMember = defineType({
     },
     prepare({ title, subtitle, media }) {
       return {
-        title: title || 'Unnamed',
+        title: title || 'Unnamed Team Member',
         subtitle: subtitle || 'No role',
         media,
       }
@@ -75,5 +83,11 @@ export const teamMember = defineType({
       name: 'orderAsc',
       by: [{ field: 'order', direction: 'asc' }],
     },
+    {
+      title: 'Name (A-Z)',
+      name: 'nameAsc',
+      by: [{ field: 'name.en', direction: 'asc' }],
+    },
   ],
 })
+

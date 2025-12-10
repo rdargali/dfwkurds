@@ -76,10 +76,10 @@ npm install
 
 3. **Set up environment variables:**
 
-Copy the example environment file and update with your values:
+Copy the sample environment file and update with your values:
 
 ```bash
-cp .env.example .env.local
+cp .env.sample .env.local
 ```
 
 Then edit `.env.local` with your Sanity project credentials:
@@ -89,6 +89,11 @@ Then edit `.env.local` with your Sanity project credentials:
 NEXT_PUBLIC_SANITY_PROJECT_ID=your-project-id
 NEXT_PUBLIC_SANITY_DATASET=production
 ```
+
+**Where to get your Sanity Project ID:**
+- Go to [sanity.io/manage](https://www.sanity.io/manage)
+- Create a new project or select an existing one
+- Copy the Project ID from the project settings
 
 4. **Run the development server:**
 
@@ -185,22 +190,56 @@ The site automatically switches layout direction based on locale:
 
 ### Creating a Sanity Project
 
-1. **Install Sanity CLI:**
+1. **Create a new project at [sanity.io/manage](https://www.sanity.io/manage)**
+   - Sign in or create a Sanity account
+   - Click "Create new project"
+   - Choose a project name (e.g., "DFW Kurds")
+   - Select a dataset name (usually `production`)
 
-```bash
-npm install -g sanity@latest
-```
+2. **Get your Project ID:**
+   - In your project dashboard, go to Settings → API
+   - Copy your Project ID (looks like: `abc123xyz`)
 
-2. **Create a new project at [sanity.io/manage](https://www.sanity.io/manage)**
-
-3. **Configure your project ID in `.env.local`**
+3. **Configure environment variables:**
+   ```bash
+   cp .env.sample .env.local
+   ```
+   Then edit `.env.local` and add your Project ID:
+   ```env
+   NEXT_PUBLIC_SANITY_PROJECT_ID=your-actual-project-id
+   NEXT_PUBLIC_SANITY_DATASET=production
+   ```
 
 4. **Deploy Sanity Studio (optional):**
 
 ```bash
-cd sanity
+# Run from project root (recommended)
 sanity deploy
 ```
+
+**Troubleshooting Sanity CLI Errors:**
+
+If you get an error: `"sanity.cli.js does not contain a project identifier"`:
+
+1. **Ensure `.env.local` exists** in the project root with your Sanity project ID:
+   ```bash
+   cp .env.sample .env.local
+   # Then edit .env.local and add your actual project ID
+   ```
+
+2. **Verify your project ID is set:**
+   ```bash
+   # Check if the config can read your project ID
+   node -e "require('./sanity.cli.js')"
+   ```
+
+3. **Restart your terminal** after creating/updating `.env.local`
+
+4. **Ensure `sanity.cli.js` exists** in the project root: `./sanity.cli.js`
+
+The `sanity.cli.js` file in the root automatically loads your project ID from `.env.local`.
+
+**Note:** The `sanity.cli.js` file will automatically read your project ID from `.env.local`. Make sure you've created `.env.local` with your Sanity project ID before running Sanity CLI commands.
 
 ### Content Types
 
