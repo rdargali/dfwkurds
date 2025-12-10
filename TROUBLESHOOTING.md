@@ -1,5 +1,55 @@
 # Troubleshooting Guide
 
+## ⚠️ CRITICAL: Environment Variables Not Set
+
+**This is the #1 most common issue!** If you see this error:
+```
+Dataset "production" not found for project ID "your-project-id"
+```
+
+**This means `NEXT_PUBLIC_SANITY_PROJECT_ID` and `NEXT_PUBLIC_SANITY_DATASET` are not set in Vercel!**
+
+### Quick Fix: Add Environment Variables to Vercel
+
+1. **Get your Sanity Project ID:**
+   - Go to [sanity.io/manage](https://www.sanity.io/manage)
+   - Select your project
+   - Copy the **Project ID** (looks like: `5d0aj8a7`)
+
+2. **Add to Vercel (REQUIRED):**
+   - Go to **Vercel Dashboard** → Your Project
+   - Click **Settings** → **Environment Variables**
+   - Click **"Add New"**
+   - Add these **two required variables**:
+
+   **Variable 1:**
+   - **Key:** `NEXT_PUBLIC_SANITY_PROJECT_ID`
+   - **Value:** Your actual Sanity Project ID (e.g., `5d0aj8a7`)
+   - **Environment:** Select **Production**, **Preview**, and **Development** (or "All")
+   - Click **Save**
+
+   **Variable 2:**
+   - **Key:** `NEXT_PUBLIC_SANITY_DATASET`
+   - **Value:** `production`
+   - **Environment:** Select **Production**, **Preview**, and **Development** (or "All")
+   - Click **Save**
+
+3. **Redeploy (REQUIRED):**
+   - After adding variables, go to **Deployments** tab
+   - Click the **"..."** menu on the latest deployment
+   - Click **"Redeploy"**
+   - ⚠️ **Important:** Environment variables only take effect after redeploy!
+
+4. **Verify:**
+   - After redeploy completes, check your site
+   - The error should be gone
+   - Events should now load from Sanity
+   - Your new events should appear
+
+**Note:** These variables are also needed in your local `.env.local` file for development. See `.env.sample` for the template.
+
+---
+
 ## Events Not Appearing on Production Site
 
 If you've added a new event in Sanity Studio but it's not showing on your Vercel production site, follow these steps:

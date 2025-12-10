@@ -36,13 +36,21 @@ git push -u origin main
 
 ## Step 3: Add Environment Variables
 
-In the Vercel project settings, add these environment variables:
+⚠️ **CRITICAL:** These environment variables are **REQUIRED** for your site to work. Without them, you'll see errors like "Dataset not found for project ID 'your-project-id'".
 
-### Required:
-- `NEXT_PUBLIC_SANITY_PROJECT_ID` - Your Sanity project ID
-- `NEXT_PUBLIC_SANITY_DATASET` - Usually `production`
+### Required (MUST ADD):
+
+1. **`NEXT_PUBLIC_SANITY_PROJECT_ID`**
+   - **How to get:** Go to [sanity.io/manage](https://www.sanity.io/manage) → Select your project → Copy the Project ID
+   - **Example value:** `5d0aj8a7` (your actual project ID)
+   - **Where to add:** Vercel → Your Project → Settings → Environment Variables
+
+2. **`NEXT_PUBLIC_SANITY_DATASET`**
+   - **Value:** `production` (or your dataset name)
+   - **Where to add:** Vercel → Your Project → Settings → Environment Variables
 
 ### Optional:
+
 - `NEXT_PUBLIC_SITE_URL` - Your production domain (for sitemap and SEO)
 - `SANITY_API_TOKEN` - If you need authenticated requests
 - `SANITY_APP_ID` - Sanity Studio deployment app ID (prevents prompts on deploy)
@@ -51,8 +59,18 @@ In the Vercel project settings, add these environment variables:
 **How to add:**
 1. Go to your project in Vercel
 2. Click **Settings** → **Environment Variables**
-3. Add each variable for **Production**, **Preview**, and **Development**
-4. Click **Save**
+3. Click **"Add New"**
+4. For each variable:
+   - **Key:** `NEXT_PUBLIC_SANITY_PROJECT_ID`
+   - **Value:** Your actual Sanity Project ID (e.g., `5d0aj8a7`)
+   - **Environment:** Select **Production**, **Preview**, and **Development** (or use "All")
+5. Repeat for `NEXT_PUBLIC_SANITY_DATASET` with value `production`
+6. Click **Save**
+
+**⚠️ Important:** After adding environment variables, you **MUST redeploy** for them to take effect:
+- Go to **Deployments** tab
+- Click **"..."** menu on latest deployment → **"Redeploy"**
+- Or push a new commit to trigger a new deployment
 
 ## Step 4: Deploy
 

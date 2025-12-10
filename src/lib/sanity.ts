@@ -9,9 +9,25 @@ type SanityImageSource = any
 // In production, use CDN for better performance
 const isDevelopment = process.env.NODE_ENV === 'development'
 
+// Get environment variables with validation
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
+
+// Validate required environment variables
+if (!projectId || projectId === 'your-project-id') {
+  const errorMessage =
+    'NEXT_PUBLIC_SANITY_PROJECT_ID is not set. Please add it to your environment variables.'
+  if (isDevelopment) {
+    console.error('❌', errorMessage)
+  } else {
+    // In production, log to help with debugging
+    console.error('[Sanity]', errorMessage)
+  }
+}
+
 export const sanityClient = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'your-project-id',
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+  projectId: projectId || 'your-project-id',
+  dataset: dataset,
   apiVersion: '2024-01-01',
   useCdn: !isDevelopment, // Disable CDN in development for immediate updates
 })
