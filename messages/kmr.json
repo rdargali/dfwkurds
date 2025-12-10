@@ -1,0 +1,88 @@
+{
+  "metadata": {
+    "title": "Komeleya Kurdan a Amerîkî ya Dallas-Fort Worth",
+    "description": "Parastina mîrasa Kurdî û hêzkirina civaka Kurdî li herêma Dallas-Fort Worth."
+  },
+  "navigation": {
+    "home": "Serûpel",
+    "about": "Derbarê Me",
+    "events": "Bûyer",
+    "resources": "Çavkanî",
+    "news": "Nûçe",
+    "contact": "Têkilî"
+  },
+  "home": {
+    "hero": {
+      "title": "Komeleya Kurdan a Amerîkî",
+      "subtitle": "ya Dallas-Fort Worth",
+      "description": "Yekbûn û hêzkirina civaka Kurdî bi rêya parastina çandî, perwerdehî û xizmetên civakî.",
+      "cta": "Bêtir Fêr Bibe",
+      "events_cta": "Bûyeran Bibîne"
+    },
+    "historical": {
+      "title": "Kesayetên Dîrokî yên Kurd",
+      "subtitle": "Rêzgirtina ji serok û qehreman ên ku dîroka Kurdî ava kirine"
+    },
+    "mission": {
+      "title": "Mîsyona Me",
+      "description": "Parastina mîrasa çandî ya Kurdî, piştgirîkirina malbatên Kurdî yên nû hatî û avakirina piran di navbera civakên Kurdî û Amerîkî de li metropola Dallas-Fort Worth."
+    }
+  },
+  "about": {
+    "title": "Derbarê Me",
+    "mission": {
+      "title": "Mîsyona Me",
+      "content": "Em ji bo parastina û pêşvebirina çanda Kurdî xebitîn dema ku em alîkariya malbatên Kurdî dikin ku di civaka Amerîkî de bicîh bibin."
+    },
+    "team": {
+      "title": "Tîma Me",
+      "subtitle": "Nas bikin kesên dilsoz ên ku karê me pêk tînin"
+    }
+  },
+  "events": {
+    "title": "Bûyer",
+    "subtitle": "Beşdarî kombûnên civakî, pîrozbahiyên çandî û bernameyên perwerdehiyê bibin",
+    "upcoming": "Bûyerên Pêşerojê",
+    "past": "Bûyerên Berê",
+    "no_events": "Di vê demê de bûyerên pêşerojê tune. Paşê dîsa serdanê bikin!",
+    "register": "Tomar Bibe",
+    "details": "Hûrguliyan Bibîne"
+  },
+  "resources": {
+    "title": "Çavkanî",
+    "subtitle": "Çavkaniyên alîkar ji bo civaka Kurdî",
+    "categories": {
+      "government": "Hikûmet",
+      "legal": "Dadrêsî",
+      "education": "Perwerdehî",
+      "healthcare": "Tenduristî",
+      "community": "Civak",
+      "cultural": "Çandî",
+      "employment": "Kar",
+      "other": "Yên Din"
+    },
+    "visit": "Serdana Çavkaniyê Bike"
+  },
+  "common": {
+    "read_more": "Bêtir Bixwîne",
+    "view_all": "Hemûyan Bibîne",
+    "loading": "Tê barkirin...",
+    "error": "Tiştek çewt derket",
+    "back": "Paşve",
+    "language": "Ziman"
+  },
+  "footer": {
+    "copyright": "© {year} Komeleya Kurdan a Amerîkî ya Dallas-Fort Worth. Hemû maf parastî ne.",
+    "contact": {
+      "title": "Bi Me Re Têkilî Daynin",
+      "email": "E-name",
+      "phone": "Têlefon"
+    },
+    "social": {
+      "title": "Me Bişopînin"
+    },
+    "quick_links": {
+      "title": "Girêdanên Bilez"
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "metadata": {
+    "title": "Kurdish American Community Association of DFW",
+    "description": "Preserving Kurdish heritage and empowering the Kurdish community in the Dallas-Fort Worth area."
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "events": "Events",
+    "resources": "Resources",
+    "news": "News",
+    "contact": "Contact"
+  },
+  "home": {
+    "hero": {
+      "title": "Kurdish American Community Association",
+      "subtitle": "of Dallas-Fort Worth",
+      "description": "Uniting and empowering the Kurdish community through cultural preservation, education, and community services.",
+      "cta": "Learn More",
+      "events_cta": "View Events"
+    },
+    "historical": {
+      "title": "Historical Kurdish Figures",
+      "subtitle": "Honoring the leaders and heroes who shaped Kurdish history"
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "To preserve Kurdish cultural heritage, support newly arrived Kurdish families, and build bridges between the Kurdish and American communities in the Dallas-Fort Worth metroplex."
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "mission": {
+      "title": "Our Mission",
+      "content": "We are dedicated to preserving and promoting Kurdish culture while helping Kurdish families integrate into American society."
+    },
+    "team": {
+      "title": "Our Team",
+      "subtitle": "Meet the dedicated individuals who make our work possible"
+    }
+  },
+  "events": {
+    "title": "Events",
+    "subtitle": "Join us for community gatherings, cultural celebrations, and educational programs",
+    "upcoming": "Upcoming Events",
+    "past": "Past Events",
+    "no_events": "No upcoming events at this time. Check back soon!",
+    "register": "Register",
+    "details": "View Details"
+  },
+  "resources": {
+    "title": "Resources",
+    "subtitle": "Helpful resources for the Kurdish community",
+    "categories": {
+      "government": "Government",
+      "legal": "Legal",
+      "education": "Education",
+      "healthcare": "Healthcare",
+      "community": "Community",
+      "cultural": "Cultural",
+      "employment": "Employment",
+      "other": "Other"
+    },
+    "visit": "Visit Resource"
+  },
+  "common": {
+    "read_more": "Read More",
+    "view_all": "View All",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "back": "Back",
+    "language": "Language"
+  },
+  "footer": {
+    "copyright": "© {year} Kurdish American Community Association of DFW. All rights reserved.",
+    "contact": {
+      "title": "Contact Us",
+      "email": "Email",
+      "phone": "Phone"
+    },
+    "social": {
+      "title": "Follow Us"
+    },
+    "quick_links": {
+      "title": "Quick Links"
+    }
+  }
+}

@@ -1,36 +1,381 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kurdish American Community Association of DFW
 
-## Getting Started
+A high-performance, mobile-first, culturally sensitive multilingual website for the Kurdish American Community Association of Dallas-Fort Worth.
 
-First, run the development server:
+## 🌟 Features
+
+### Trilingual Support
+
+- **English (en)** — Default language, LTR layout
+- **Sorani Kurdish (ckb)** — Full RTL support with Arabic script fonts (کوردی سۆرانی)
+- **Kurmanji Kurdish (kmr)** — Latin script, LTR layout (Kurmancî)
+
+### Cultural Design
+
+- **Kurdish Flag Colors** — Authentic red (#ED2024), green (#278E43), and gold (#FEBD11) palette
+- **21-Ray Sun Emblem** — Custom SVG component representing Newroz (March 21st)
+- **RTL/LTR Support** — Automatic layout direction based on language
+- **Typography** — Outfit for Latin text, Noto Naskh Arabic for Kurdish script
+
+### Mobile-First Design
+
+- Sticky bottom navigation on mobile devices
+- Touch-friendly button sizes (min 44px tap targets)
+- Responsive card layouts
+- Optimized for older users and children alike
+
+### Progressive Web App (PWA)
+
+- **Installable** — Users can install the app on their devices
+- **Offline Support** — Cached content available when offline
+- **Fast Loading** — Service worker caches assets for instant loading
+- **App-like Experience** — Standalone mode with custom theme colors
+
+### Pages
+
+| Page          | Description                                                                      |
+| ------------- | -------------------------------------------------------------------------------- |
+| **Home**      | Hero section with Kurdish sun, mission overview, historical figures              |
+| **About**     | Mission statement, team members grid                                             |
+| **Events**    | Community events with date localization, Google Maps links, calendar integration |
+| **Resources** | Categorized community resources with external links                              |
+
+## 🛠 Tech Stack
+
+| Technology   | Version | Purpose                         |
+| ------------ | ------- | ------------------------------- |
+| Next.js      | 16.0.8  | React framework with App Router |
+| React        | 19.2.1  | UI library                      |
+| Tailwind CSS | 4.x     | Utility-first styling           |
+| next-intl    | 4.5.8   | Internationalization            |
+| Sanity.io    | 4.x     | Headless CMS                    |
+| TypeScript   | 5.x     | Type safety                     |
+| next-pwa     | 5.6.0   | Progressive Web App support     |
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18.17 or later
+- npm, yarn, or pnpm
+
+### Installation
+
+1. **Clone the repository:**
+
+```bash
+git clone https://github.com/your-org/dfwkurds-sanity.git
+cd dfwkurds-sanity
+```
+
+2. **Install dependencies:**
+
+```bash
+npm install
+```
+
+3. **Set up environment variables:**
+
+Copy the example environment file and update with your values:
+
+```bash
+cp .env.example .env.local
+```
+
+Then edit `.env.local` with your Sanity project credentials:
+
+```env
+# Sanity CMS Configuration
+NEXT_PUBLIC_SANITY_PROJECT_ID=your-project-id
+NEXT_PUBLIC_SANITY_DATASET=production
+```
+
+4. **Run the development server:**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev          # Start development server (Turbopack)
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+npm run format       # Format code with Prettier
+npm run format:check # Check code formatting
+```
 
-## Learn More
+## 📁 Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+dfwkurds-sanity/
+├── messages/                    # Translation JSON files
+│   ├── en.json                 # English translations
+│   ├── ckb.json                # Sorani Kurdish translations
+│   └── kmr.json                # Kurmanji Kurdish translations
+├── public/                      # Static assets
+├── sanity/                      # Sanity CMS configuration
+│   ├── sanity.config.ts        # Studio configuration
+│   └── schemas/                # Content type definitions
+│       ├── event.ts            # Events schema
+│       ├── newsPost.ts         # News articles schema
+│       ├── teamMember.ts       # Team members schema
+│       ├── resource.ts         # Resources schema
+│       └── localeString.ts     # Localized string helper
+├── src/
+│   ├── app/
+│   │   ├── [locale]/           # Localized pages
+│   │   │   ├── layout.tsx      # Root layout with fonts & direction
+│   │   │   ├── page.tsx        # Home page
+│   │   │   ├── about/          # About page
+│   │   │   ├── events/         # Events page
+│   │   │   └── resources/      # Resources page
+│   │   ├── globals.css         # Global styles & design tokens
+│   │   └── favicon.ico
+│   ├── components/
+│   │   ├── layout/             # Header, Footer, MobileNav, LanguageSwitcher
+│   │   ├── home/               # HeroSection, MissionSection, HistoricalFigures
+│   │   ├── about/              # MissionSection, TeamSection
+│   │   ├── events/             # EventsList, EventCard
+│   │   └── resources/          # ResourcesList, ResourceCard
+│   ├── i18n/
+│   │   ├── config.ts           # Locale configuration
+│   │   └── request.ts          # next-intl request config
+│   ├── lib/
+│   │   ├── sanity.ts           # Sanity client & helpers
+│   │   └── design-tokens.ts    # Color & design constants
+│   └── proxy.ts                # Locale detection proxy (Next.js 16)
+├── next.config.ts              # Next.js configuration
+├── tailwind.config.ts          # Tailwind configuration
+└── package.json
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎨 Design System
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Color Palette
 
-## Deploy on Vercel
+| Name          | CSS Variable   | Hex       | Usage                      |
+| ------------- | -------------- | --------- | -------------------------- |
+| Kurdish Red   | `--kurd-red`   | `#ED2024` | Primary actions, accents   |
+| Kurdish Green | `--kurd-green` | `#278E43` | Success, secondary accents |
+| Kurdish Gold  | `--kurd-gold`  | `#FEBD11` | Highlights, sun emblem     |
+| Slate 900     | `--slate-900`  | `#1E293B` | Dark backgrounds, text     |
+| Slate 50      | `--slate-50`   | `#F8FAFC` | Light backgrounds          |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Typography
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Headings:** Outfit (geometric sans-serif)
+- **Body:** Outfit
+- **Arabic Script:** Noto Naskh Arabic
+- **Accent:** Playfair Display (serif)
+
+### RTL Support
+
+The site automatically switches layout direction based on locale:
+
+- Uses `dir="rtl"` on `<html>` for Sorani Kurdish (ckb)
+- Tailwind logical properties: `ms-`, `me-`, `ps-`, `pe-`, `start`, `end`
+- Mirrored navigation and content flow
+
+## 🗄️ Sanity CMS Setup
+
+### Creating a Sanity Project
+
+1. **Install Sanity CLI:**
+
+```bash
+npm install -g sanity@latest
+```
+
+2. **Create a new project at [sanity.io/manage](https://www.sanity.io/manage)**
+
+3. **Configure your project ID in `.env.local`**
+
+4. **Deploy Sanity Studio (optional):**
+
+```bash
+cd sanity
+sanity deploy
+```
+
+### Content Types
+
+All content types support field-level localization (en, ckb, kmr):
+
+| Type            | Fields                                                              |
+| --------------- | ------------------------------------------------------------------- |
+| **Event**       | title, description, date, location, address, image, registrationUrl |
+| **News Post**   | title, body, mainImage, publishedAt, featured                       |
+| **Team Member** | name, role, photo, bio, email, linkedin, order                      |
+| **Resource**    | name, url, description, logo, category, order                       |
+
+## 📱 Progressive Web App (PWA)
+
+This website is a Progressive Web App, allowing users to install it on their devices and use it offline.
+
+### Features
+
+- **Installable** — Add to home screen on mobile and desktop
+- **Offline Support** — Cached pages work without internet
+- **Fast Performance** — Service worker caches assets
+- **App-like Experience** — Standalone mode with custom theme
+
+### Generating PWA Icons
+
+Before deploying, you need to generate PWA icons:
+
+1. **Create a source image:**
+   - Create a 512x512px PNG image with the Kurdish Sun symbol
+   - Save it as `public/icon-source.png`
+
+2. **Generate icons:**
+
+   ```bash
+   # Install sharp (if not already installed)
+   npm install --save-dev sharp
+
+   # Generate all icon sizes
+   node scripts/generate-icons.js
+   ```
+
+3. **Verify icons:**
+   - Check that all icons are in `public/icons/` directory
+   - Sizes: 72, 96, 128, 144, 152, 192, 384, 512 pixels
+
+### Testing PWA
+
+1. **Build the app:**
+
+   ```bash
+   npm run build
+   npm run start
+   ```
+
+2. **Test installation:**
+   - Open the site in Chrome/Edge
+   - Look for the install prompt in the address bar
+   - Or use Chrome DevTools → Application → Manifest
+
+3. **Test offline:**
+   - Open Chrome DevTools → Network
+   - Enable "Offline" mode
+   - Navigate to previously visited pages
+
+### PWA Configuration
+
+- **Manifest:** `/public/manifest.json`
+- **Service Worker:** Auto-generated by next-pwa in production
+- **Theme Color:** `#ED2024` (Kurdish red)
+- **Background Color:** `#0F172A` (slate-900)
+
+**Note:** PWA features are disabled in development mode. Test in production build.
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+
+1. **Push to GitHub:**
+
+```bash
+git add .
+git commit -m "Initial commit"
+git push origin main
+```
+
+2. **Import to Vercel:**
+   - Go to [vercel.com/new](https://vercel.com/new)
+   - Import your GitHub repository
+   - Framework will be auto-detected as Next.js
+
+3. **Configure Environment Variables:**
+   - `NEXT_PUBLIC_SANITY_PROJECT_ID` — Your Sanity project ID
+   - `NEXT_PUBLIC_SANITY_DATASET` — Usually `production`
+
+4. **Deploy!**
+
+### Other Platforms
+
+The site can be deployed to any platform supporting Next.js 16:
+
+- **Netlify** — Use the Next.js plugin
+- **AWS Amplify** — Next.js SSR support
+- **Docker** — Use `next build && next start`
+- **Node.js Server** — Run `npm run build && npm run start`
+
+### Production Build
+
+```bash
+# Build the application
+npm run build
+
+# Start production server
+npm run start
+
+# Or use a process manager like PM2
+pm2 start npm --name "dfwkurds" -- start
+```
+
+## 🔧 Configuration
+
+### Environment Variables
+
+| Variable                        | Required | Description                             |
+| ------------------------------- | -------- | --------------------------------------- |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Yes      | Sanity project ID from sanity.io/manage |
+| `NEXT_PUBLIC_SANITY_DATASET`    | Yes      | Dataset name (usually `production`)     |
+| `NEXT_PUBLIC_SITE_URL`          | No       | Production site URL for sitemap/SEO     |
+| `SANITY_API_TOKEN`              | No       | Token for authenticated Sanity requests |
+
+### Customization
+
+**Adding a new language:**
+
+1. Add locale to `src/i18n/config.ts`
+2. Create translation file in `messages/`
+3. Add to `sanity/schemas/localeString.ts`
+4. Update middleware matcher if needed
+
+**Changing colors:**
+Edit CSS variables in `src/app/globals.css`
+
+**Adding new pages:**
+Create folder in `src/app/[locale]/` with `page.tsx`
+
+## 📱 Browser Support
+
+- Chrome/Edge 90+
+- Firefox 90+
+- Safari 14+
+- iOS Safari 14+
+- Chrome for Android 90+
+
+## 🔍 SEO & Performance
+
+- **Sitemap:** Auto-generated at `/sitemap.xml`
+- **Robots.txt:** Configured at `/robots.txt`
+- **Open Graph:** Full metadata for social sharing
+- **Twitter Cards:** Optimized for Twitter sharing
+- **PWA:** Installable with offline support
+- **Image Optimization:** Next.js Image component with Sanity CDN
+
+**Note:** Update the domain in `src/app/sitemap.ts` and `public/robots.txt` before deployment.
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/my-feature`
+3. Commit changes: `git commit -am 'Add my feature'`
+4. Push to branch: `git push origin feature/my-feature`
+5. Open a Pull Request
+
+## 📄 License
+
+Copyright © 2024 Kurdish American Community Association of DFW. All rights reserved.
+
+---
+
+Built with ❤️ for the Kurdish community in Dallas-Fort Worth

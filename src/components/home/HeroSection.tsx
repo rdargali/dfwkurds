@@ -1,0 +1,117 @@
+'use client'
+
+import Link from 'next/link'
+import { useTranslations, useLocale } from 'next-intl'
+import { getUrlPath, type Locale } from '@/i18n/config'
+import { KurdishSunIcon } from '@/components/layout/KurdishSunIcon'
+
+export function HeroSection() {
+  const t = useTranslations('home.hero')
+  const locale = useLocale() as Locale
+  const urlPath = getUrlPath(locale)
+
+  const welcomeText: Record<string, string> = {
+    en: 'Welcome to the Kurdish Community',
+    ckb: 'بە خێر بێیت بۆ کۆمەڵگای کوردی',
+    kmr: 'Bi xêr hatî Civaka Kurdî',
+  }
+
+  const statsLabels: Record<string, { years: string; families: string; events: string }> = {
+    en: { years: 'Years of Service', families: 'Kurdish Families', events: 'Annual Events' },
+    ckb: { years: 'ساڵ خزمەتگوزاری', families: 'خێزانی کوردی', events: 'چالاکی ساڵانە' },
+    kmr: { years: 'Sal Xizmet', families: 'Malbatên Kurd', events: 'Bûyerên Salane' },
+  }
+
+  const stats = statsLabels[locale] || statsLabels.en
+
+  return (
+    <section className="relative min-h-[85vh] md:min-h-[80vh] flex items-center hero-dark overflow-hidden">
+      {/* Animated Golden Sun Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] md:w-[700px] md:h-[700px] sun-glow rounded-full animate-glow-pulse pointer-events-none" />
+
+      {/* Secondary glow for depth */}
+      <div className="absolute top-1/3 end-1/4 w-[300px] h-[300px] sun-glow-subtle rounded-full pointer-events-none" />
+
+      {/* Subtle grid pattern */}
+      <div className="absolute inset-0 bg-pattern-grid opacity-[0.03] pointer-events-none" />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        <div className="flex flex-col items-center text-center">
+          {/* Sun Emblem */}
+          <div className="mb-8 animate-scale-in">
+            <div className="w-20 h-20 md:w-28 md:h-28 rounded-2xl bg-gradient-to-br from-kurd-gold via-kurd-gold to-kurd-gold-dark flex items-center justify-center shadow-2xl shadow-kurd-gold/30 transform hover:scale-105 transition-transform">
+              <KurdishSunIcon className="w-12 h-12 md:w-16 md:h-16 text-slate-900" />
+            </div>
+          </div>
+
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kurd-green/20 border border-kurd-green/30 text-kurd-green-light text-sm font-medium mb-6 animate-fade-in">
+            <span className="w-2 h-2 rounded-full bg-kurd-green animate-pulse" />
+            {welcomeText[locale] || welcomeText.en}
+          </div>
+
+          {/* Title */}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-6 animate-slide-up">
+            <span className="block text-white mb-2">{t('title')}</span>
+            <span className="block text-gradient-gold">{t('subtitle')}</span>
+          </h1>
+
+          {/* Description */}
+          <p className="text-lg md:text-xl text-slate-300 leading-relaxed mb-10 max-w-2xl animate-slide-up delay-100">
+            {t('description')}
+          </p>
+
+          {/* CTA Buttons - Larger touch targets */}
+          <div className="flex flex-col sm:flex-row gap-4 animate-slide-up delay-200">
+            <Link href={`/${urlPath}/about`} className="btn btn-primary btn-touch text-lg">
+              {t('cta')}
+              <svg
+                className="w-5 h-5 rtl:rotate-180"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </Link>
+            <Link href={`/${urlPath}/events`} className="btn btn-outline btn-touch text-lg">
+              {t('events_cta')}
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+            </Link>
+          </div>
+
+          {/* Stats - Larger and more prominent */}
+          <div className="flex flex-wrap justify-center gap-10 md:gap-16 mt-16 pt-10 border-t border-white/10 animate-slide-up delay-300">
+            <div className="text-center">
+              <p className="text-4xl md:text-5xl font-extrabold text-kurd-red">30+</p>
+              <p className="text-base text-slate-300 mt-2 font-medium">{stats.years}</p>
+            </div>
+            <div className="text-center">
+              <p className="text-4xl md:text-5xl font-extrabold text-kurd-green">1000+</p>
+              <p className="text-base text-slate-300 mt-2 font-medium">{stats.families}</p>
+            </div>
+            <div className="text-center">
+              <p className="text-4xl md:text-5xl font-extrabold text-kurd-gold">50+</p>
+              <p className="text-base text-slate-300 mt-2 font-medium">{stats.events}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom gradient fade */}
+      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+    </section>
+  )
+}
