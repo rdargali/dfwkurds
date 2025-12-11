@@ -50,6 +50,7 @@ export const resource = defineType({
           { title: 'Community', value: 'community' },
           { title: 'Cultural', value: 'cultural' },
           { title: 'Employment', value: 'employment' },
+          { title: 'News', value: 'news' },
           { title: 'Other', value: 'other' },
         ],
       },
@@ -77,6 +78,7 @@ export const resource = defineType({
         community: '🤝 Community',
         cultural: '🎭 Cultural',
         employment: '💼 Employment',
+        news: '📰 News',
         other: '📋 Other',
       }
       return {

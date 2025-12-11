@@ -14,7 +14,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     <div className="flex flex-col">
       <HeroSection />
       <MissionSection />
-      <HistoricalFigures />
+      <HistoricalFigures locale={locale} />
     </div>
   )
 }

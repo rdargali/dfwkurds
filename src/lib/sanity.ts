@@ -138,6 +138,20 @@ export interface Resource {
   order: number
 }
 
+export interface HistoricalFigure {
+  _id: string
+  _type: 'historicalFigure'
+  name: LocaleString
+  role: LocaleString
+  description: LocaleText
+  photo?: {
+    asset: SanityImageSource
+    alt?: LocaleString
+  }
+  color: 'kurd-red' | 'kurd-green' | 'kurd-gold'
+  order: number
+}
+
 // Helper to get localized string based on current locale
 // Falls back: requested locale -> English -> first available
 export function getLocalizedValue<T>(

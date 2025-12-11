@@ -18,6 +18,7 @@ type Category =
   | 'community'
   | 'cultural'
   | 'employment'
+  | 'news'
   | 'other'
 
 const categoryOrder: Category[] = [
@@ -28,6 +29,7 @@ const categoryOrder: Category[] = [
   'employment',
   'community',
   'cultural',
+  'news',
   'other',
 ]
 
@@ -102,6 +104,16 @@ const categoryIcons: Record<Category, React.ReactNode> = {
       />
     </svg>
   ),
+  news: (
+    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+      />
+    </svg>
+  ),
   other: (
     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path
@@ -118,10 +130,11 @@ const categoryColors: Record<Category, { bg: string; text: string }> = {
   government: { bg: 'bg-kurd-red/10', text: 'text-kurd-red' },
   legal: { bg: 'bg-kurd-green/10', text: 'text-kurd-green' },
   education: { bg: 'bg-kurd-gold/10', text: 'text-kurd-gold-dark' },
-  healthcare: { bg: 'bg-kurd-red/10', text: 'text-kurd-red' },
-  community: { bg: 'bg-kurd-green/10', text: 'text-kurd-green' },
-  cultural: { bg: 'bg-kurd-gold/10', text: 'text-kurd-gold-dark' },
-  employment: { bg: 'bg-kurd-red/10', text: 'text-kurd-red' },
+  healthcare: { bg: 'bg-blue-50', text: 'text-blue-600' },
+  community: { bg: 'bg-indigo-50', text: 'text-indigo-600' },
+  cultural: { bg: 'bg-amber-50', text: 'text-amber-600' },
+  employment: { bg: 'bg-teal-50', text: 'text-teal-600' },
+  news: { bg: 'bg-cyan-50', text: 'text-cyan-600' },
   other: { bg: 'bg-slate-100', text: 'text-slate-600' },
 }
 

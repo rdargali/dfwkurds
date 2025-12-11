@@ -12,6 +12,7 @@ type Category =
   | 'community'
   | 'cultural'
   | 'employment'
+  | 'news'
   | 'other'
 
 interface ResourceCardProps {
@@ -37,24 +38,29 @@ const categoryColors: Record<Category, { border: string; text: string; hover: st
     hover: 'hover:text-kurd-gold-dark',
   },
   healthcare: {
-    border: 'border-t-kurd-red',
-    text: 'text-kurd-red',
-    hover: 'hover:text-kurd-red-dark',
+    border: 'border-t-blue-500',
+    text: 'text-blue-600',
+    hover: 'hover:text-blue-700',
   },
   community: {
-    border: 'border-t-kurd-green',
-    text: 'text-kurd-green',
-    hover: 'hover:text-kurd-green-dark',
+    border: 'border-t-indigo-500',
+    text: 'text-indigo-600',
+    hover: 'hover:text-indigo-700',
   },
   cultural: {
-    border: 'border-t-kurd-gold',
-    text: 'text-kurd-gold-dark',
-    hover: 'hover:text-kurd-gold-dark',
+    border: 'border-t-amber-500',
+    text: 'text-amber-600',
+    hover: 'hover:text-amber-700',
   },
   employment: {
-    border: 'border-t-kurd-red',
-    text: 'text-kurd-red',
-    hover: 'hover:text-kurd-red-dark',
+    border: 'border-t-teal-500',
+    text: 'text-teal-600',
+    hover: 'hover:text-teal-700',
+  },
+  news: {
+    border: 'border-t-cyan-500',
+    text: 'text-cyan-600',
+    hover: 'hover:text-cyan-700',
   },
   other: { border: 'border-t-slate-300', text: 'text-slate-600', hover: 'hover:text-slate-900' },
 }

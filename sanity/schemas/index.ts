@@ -4,6 +4,7 @@ import { newsPost } from './newsPost'
 import { event } from './event'
 import { teamMember } from './teamMember'
 import { resource } from './resource'
+import { historicalFigure } from './historicalFigure'
 
 export const schemaTypes = [
   // Localization helpers (must be first)
@@ -15,4 +16,5 @@ export const schemaTypes = [
   event,
   teamMember,
   resource,
+  historicalFigure,
 ]

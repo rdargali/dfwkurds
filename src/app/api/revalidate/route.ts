@@ -67,12 +67,15 @@ export async function POST(request: NextRequest) {
         break
 
       case 'newsPost':
-        // Revalidate homepage for all locales
+        // Revalidate news pages for all locales
+        for (const locale of locales) {
+          revalidatePath(`/${locale}/news`)
+          revalidatePath(`/${locale}/news`, 'page')
+        }
+        // Also revalidate homepage (may show featured news)
         for (const locale of locales) {
           revalidatePath(`/${locale}`)
         }
-        // If you have a news page, add it here:
-        // revalidatePath(`/${locale}/news`)
         break
 
       case 'teamMember':
@@ -89,14 +92,23 @@ export async function POST(request: NextRequest) {
         }
         break
 
+      case 'historicalFigure':
+        // Revalidate homepage for all locales (historical figures appear on homepage)
+        for (const locale of locales) {
+          revalidatePath(`/${locale}`)
+        }
+        break
+
       default:
         // For unknown types, revalidate all pages
         for (const locale of locales) {
           revalidatePath(`/${locale}`, 'page')
           revalidatePath(`/${locale}/events`, 'page')
+          revalidatePath(`/${locale}/news`, 'page')
           revalidatePath(`/${locale}/about`, 'page')
           revalidatePath(`/${locale}/resources`, 'page')
         }
+        break
     }
 
     // Also revalidate sitemap

@@ -48,6 +48,15 @@
     "register": "Tomar Bibe",
     "details": "Hûrguliyan Bibîne"
   },
+  "news": {
+    "title": "Nûçe",
+    "subtitle": "Bi nûçe û nûkirinên herî nû yên civaka me re bisekine",
+    "featured": "Gotarên Taybetî",
+    "all_posts": "Hemû Gotar",
+    "no_posts": "Di vê demê de gotarên nûçeyê tune. Paşê dîsa serdanê bikin!",
+    "read_more": "Bêtir Bixwîne",
+    "back_to_news": "Vegere Nûçeyan"
+  },
   "resources": {
     "title": "Çavkanî",
     "subtitle": "Çavkaniyên alîkar ji bo civaka Kurdî",
@@ -59,6 +68,7 @@
       "community": "Civak",
       "cultural": "Çandî",
       "employment": "Kar",
+      "news": "Nûçe",
       "other": "Yên Din"
     },
     "visit": "Serdana Çavkaniyê Bike"

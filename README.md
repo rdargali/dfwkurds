@@ -38,6 +38,7 @@ A high-performance, mobile-first, culturally sensitive multilingual website for 
 | **Home**      | Hero section with Kurdish sun, mission overview, historical figures              |
 | **About**     | Mission statement, team members grid                                             |
 | **Events**    | Community events with date localization, Google Maps links, calendar integration |
+| **News**      | News posts and updates with featured posts, full article pages, and rich content |
 | **Resources** | Categorized community resources with external links                              |
 
 ## 🛠 Tech Stack
@@ -155,6 +156,9 @@ dfwkurds/
 │   │   │   ├── page.tsx        # Home page
 │   │   │   ├── about/          # About page
 │   │   │   ├── events/         # Events page
+│   │   │   ├── news/           # News pages
+│   │   │   │   ├── page.tsx    # News list page
+│   │   │   │   └── [slug]/     # Individual news post pages
 │   │   │   └── resources/      # Resources page
 │   │   ├── globals.css         # Global styles & design tokens
 │   │   └── favicon.ico
@@ -163,6 +167,7 @@ dfwkurds/
 │   │   ├── home/               # HeroSection, MissionSection, HistoricalFigures
 │   │   ├── about/              # MissionSection, TeamSection
 │   │   ├── events/             # EventsList, EventCard
+│   │   ├── news/               # NewsList, NewsCard
 │   │   └── resources/          # ResourcesList, ResourceCard
 │   ├── i18n/
 │   │   ├── config.ts           # Locale configuration

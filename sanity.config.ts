@@ -62,10 +62,18 @@ export default defineConfig({
                   .title('Resources')
                   .defaultOrdering([{ field: 'order', direction: 'asc' }])
               ),
+            S.listItem()
+              .title('Historical Figures')
+              .schemaType('historicalFigure')
+              .child(
+                S.documentTypeList('historicalFigure')
+                  .title('Historical Figures')
+                  .defaultOrdering([{ field: 'order', direction: 'asc' }])
+              ),
             S.divider(),
             ...S.documentTypeListItems().filter(
               listItem =>
-                !['newsPost', 'event', 'teamMember', 'resource'].includes(
+                !['newsPost', 'event', 'teamMember', 'resource', 'historicalFigure'].includes(
                   listItem.getId() as string
                 )
             ),
