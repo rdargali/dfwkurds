@@ -90,4 +90,3 @@ export const teamMember = defineType({
     },
   ],
 })
-

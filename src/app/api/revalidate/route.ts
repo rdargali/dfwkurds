@@ -1,12 +1,12 @@
-import { revalidatePath, revalidateTag } from 'next/cache'
+import { revalidatePath } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
 
 /**
  * On-demand revalidation API route
- * 
+ *
  * This endpoint can be called by Sanity webhooks to immediately
  * invalidate the Next.js cache when content is published or updated.
- * 
+ *
  * Usage:
  * 1. Set up a webhook in Sanity Studio:
  *    - Go to: https://www.sanity.io/manage
@@ -14,9 +14,9 @@ import { NextRequest, NextResponse } from 'next/server'
  *    - Add webhook URL: https://your-domain.com/api/revalidate
  *    - Secret: Set REVALIDATE_SECRET in Vercel environment variables
  *    - Trigger on: Create, Update, Delete
- * 
+ *
  * 2. Add REVALIDATE_SECRET to your Vercel environment variables
- * 
+ *
  * Security: This endpoint requires a secret token to prevent unauthorized access
  */
 export async function POST(request: NextRequest) {
@@ -27,17 +27,11 @@ export async function POST(request: NextRequest) {
 
     if (!expectedSecret) {
       console.error('REVALIDATE_SECRET is not set in environment variables')
-      return NextResponse.json(
-        { error: 'Revalidation not configured' },
-        { status: 500 }
-      )
+      return NextResponse.json({ error: 'Revalidation not configured' }, { status: 500 })
     }
 
     if (secret !== expectedSecret) {
-      return NextResponse.json(
-        { error: 'Invalid secret' },
-        { status: 401 }
-      )
+      return NextResponse.json({ error: 'Invalid secret' }, { status: 401 })
     }
 
     // Parse webhook payload
@@ -45,10 +39,7 @@ export async function POST(request: NextRequest) {
     const { _type, _id } = body
 
     if (!_type) {
-      return NextResponse.json(
-        { error: 'Missing _type in payload' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'Missing _type in payload' }, { status: 400 })
     }
 
     // Revalidate based on content type
@@ -123,7 +114,10 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Revalidation error:', error)
     return NextResponse.json(
-      { error: 'Error revalidating', details: error instanceof Error ? error.message : 'Unknown error' },
+      {
+        error: 'Error revalidating',
+        details: error instanceof Error ? error.message : 'Unknown error',
+      },
       { status: 500 }
     )
   }
@@ -140,10 +134,7 @@ export async function GET(request: NextRequest) {
   // In production, require secret
   if (process.env.NODE_ENV === 'production') {
     if (!expectedSecret) {
-      return NextResponse.json(
-        { error: 'Revalidation not configured' },
-        { status: 500 }
-      )
+      return NextResponse.json({ error: 'Revalidation not configured' }, { status: 500 })
     }
     if (secret !== expectedSecret) {
       return NextResponse.json(
@@ -165,12 +156,13 @@ export async function GET(request: NextRequest) {
 
   return NextResponse.json({
     message: 'Revalidation endpoint',
-    usage: process.env.NODE_ENV === 'production'
-      ? 'GET /api/revalidate?secret=YOUR_SECRET&path=/en/events'
-      : 'GET /api/revalidate?path=/en/events',
-    note: process.env.NODE_ENV === 'production'
-      ? 'Requires secret token in production'
-      : 'Available in development without secret',
+    usage:
+      process.env.NODE_ENV === 'production'
+        ? 'GET /api/revalidate?secret=YOUR_SECRET&path=/en/events'
+        : 'GET /api/revalidate?path=/en/events',
+    note:
+      process.env.NODE_ENV === 'production'
+        ? 'Requires secret token in production'
+        : 'Available in development without secret',
   })
 }
-

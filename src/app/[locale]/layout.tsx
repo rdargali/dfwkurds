@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import { Outfit, Playfair_Display, Noto_Naskh_Arabic } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
-import { getMessages, setRequestLocale } from 'next-intl/server'
+import { getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { locales, type Locale, getDirection, localeToUrlPath, urlPathToLocale } from '@/i18n/config'
+import { setupLocale } from '@/lib/page-utils'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { MobileNav } from '@/components/layout/MobileNav'
@@ -103,7 +104,7 @@ export async function generateMetadata({
   }
 }
 
-export async function generateViewport({ params }: { params: Promise<{ locale: string }> }) {
+export async function generateViewport() {
   return {
     themeColor: '#ED2024',
   }
@@ -116,7 +117,7 @@ export default async function LocaleLayout({
   children: React.ReactNode
   params: Promise<{ locale: string }>
 }) {
-  const { locale: localeParam } = await params
+  const localeParam = (await params).locale
 
   // Validate locale - can be either a locale code (ckb, kmr, en) or SEO-friendly path (sorani, kurmanji, en)
   const isValidLocale = locales.includes(localeParam as Locale)
@@ -130,7 +131,7 @@ export default async function LocaleLayout({
   const locale = urlPathToLocale[localeParam] || (localeParam as Locale)
 
   // Enable static rendering
-  setRequestLocale(locale)
+  await setupLocale(params)
 
   // Get the direction for this locale
   const direction = getDirection(locale as Locale)

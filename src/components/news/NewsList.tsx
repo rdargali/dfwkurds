@@ -26,11 +26,7 @@ export function NewsList({ newsPosts, locale }: NewsListProps) {
         {/* Page header */}
         <div className="text-center mb-12 md:mb-16">
           <span className="inline-block px-4 py-2 rounded-full bg-cyan-50 text-cyan-600 text-sm font-semibold mb-5">
-            {locale === 'ckb'
-              ? 'هەواڵەکان'
-              : locale === 'kmr'
-                ? 'Nûçe'
-                : 'News & Updates'}
+            {locale === 'ckb' ? 'هەواڵەکان' : locale === 'kmr' ? 'Nûçe' : 'News & Updates'}
           </span>
           <h1 className="page-title mb-5">{t('title')}</h1>
           <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
@@ -56,8 +52,7 @@ export function NewsList({ newsPosts, locale }: NewsListProps) {
             </svg>
           </span>
           <span className="font-medium">
-            {newsPosts.length}{' '}
-            {locale === 'ckb' ? 'هەواڵ' : locale === 'kmr' ? 'nûçe' : 'posts'}
+            {newsPosts.length} {locale === 'ckb' ? 'هەواڵ' : locale === 'kmr' ? 'nûçe' : 'posts'}
           </span>
         </div>
 
@@ -140,4 +135,3 @@ export function NewsList({ newsPosts, locale }: NewsListProps) {
     </section>
   )
 }
-

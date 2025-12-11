@@ -37,7 +37,9 @@ try {
 // Get project ID and dataset from environment variables
 // Check both SANITY_STUDIO_ (Sanity standard) and NEXT_PUBLIC_ (Next.js compatibility)
 const projectId =
-  process.env.SANITY_STUDIO_PROJECT_ID || process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'your-project-id'
+  process.env.SANITY_STUDIO_PROJECT_ID ||
+  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ||
+  'your-project-id'
 const dataset =
   process.env.SANITY_STUDIO_DATASET || process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
 
@@ -66,4 +68,3 @@ module.exports = defineCliConfig({
   //   appId: 'YOUR_SANITY_APP_ID',
   // },
 })
-

@@ -12,6 +12,17 @@ const eslintConfig = defineConfig([
     'out/**',
     'build/**',
     'next-env.d.ts',
+    // Additional ignores:
+    'dist/**',
+    'node_modules/**',
+    '.sanity/**',
+    'public/sw.js',
+    'public/sw.js.map',
+    'public/workbox-*.js',
+    'public/workbox-*.js.map',
+    // Config and script files that use CommonJS
+    'sanity.cli.js',
+    'scripts/**',
   ]),
 ])
 

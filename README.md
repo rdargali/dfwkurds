@@ -2,6 +2,9 @@
 
 A high-performance, mobile-first, culturally sensitive multilingual website for the Kurdish American Community Association of Dallas-Fort Worth.
 
+**Version:** 1.0.0 (Initial Release)  
+**Release Date:** December 2025
+
 ## 🌟 Features
 
 ### Trilingual Support
@@ -98,6 +101,7 @@ NEXT_PUBLIC_SANITY_DATASET=production
 **Note:** Sanity Studio automatically loads `.env` files and exposes variables with the `SANITY_STUDIO_` prefix. The `NEXT_PUBLIC_` variables are used by your Next.js website.
 
 **Where to get your Sanity Project ID:**
+
 - Go to [sanity.io/manage](https://www.sanity.io/manage)
 - Create a new project or select an existing one
 - Copy the Project ID from the project settings
@@ -141,19 +145,50 @@ dfwkurds/
 │   ├── ckb.json                # Sorani Kurdish translations
 │   └── kmr.json                # Kurmanji Kurdish translations
 ├── public/                      # Static assets
+│   └── icons/                  # PWA icons (generated)
 ├── sanity/                      # Sanity CMS configuration
-│   ├── sanity.config.ts        # Studio configuration
 │   └── schemas/                # Content type definitions
 │       ├── event.ts            # Events schema
 │       ├── newsPost.ts         # News articles schema
+│       ├── historicalFigure.ts # Historical figures schema
 │       ├── teamMember.ts       # Team members schema
 │       ├── resource.ts         # Resources schema
 │       └── localeString.ts     # Localized string helper
+├── scripts/                     # Build and utility scripts
+│   ├── generate-icons.js       # Generate PWA icons
+│   └── generate-source-icon.js # Generate source icon
 ├── src/
 │   ├── app/
 │   │   ├── [locale]/           # Localized pages
 │   │   │   ├── layout.tsx      # Root layout with fonts & direction
 │   │   │   ├── page.tsx        # Home page
+│   │   │   ├── about/          # About page
+│   │   │   ├── events/         # Events listing page
+│   │   │   ├── news/           # News section
+│   │   │   │   ├── page.tsx    # News listing page
+│   │   │   │   └── [slug]/     # Individual news post pages
+│   │   │   └── resources/      # Resources page
+│   │   ├── api/
+│   │   │   └── revalidate/     # On-demand cache revalidation
+│   │   └── offline/            # Offline page for PWA
+│   ├── components/             # React components
+│   │   ├── about/              # About page components
+│   │   ├── events/             # Events components
+│   │   ├── home/               # Homepage components
+│   │   ├── layout/             # Layout components (Header, Footer, Nav)
+│   │   ├── news/               # News components
+│   │   └── resources/          # Resources components
+│   ├── data/                   # Placeholder/fallback data
+│   │   ├── placeholderEvents.ts
+│   │   ├── placeholderNewsPosts.ts
+│   │   └── placeholderResources.ts
+│   ├── i18n/                   # Internationalization
+│   │   ├── config.ts          # Locale configuration
+│   │   └── request.ts         # Request configuration
+│   └── lib/                    # Shared utilities
+│       ├── design-tokens.ts    # Design system tokens
+│       ├── page-utils.ts       # Reusable page utilities
+│       └── sanity.ts           # Sanity client and helpers
 │   │   │   ├── about/          # About page
 │   │   │   ├── events/         # Events page
 │   │   │   ├── news/           # News pages
@@ -172,9 +207,14 @@ dfwkurds/
 │   ├── i18n/
 │   │   ├── config.ts           # Locale configuration
 │   │   └── request.ts          # next-intl request config
-│   ├── lib/
-│   │   ├── sanity.ts           # Sanity client & helpers
-│   │   └── design-tokens.ts    # Color & design constants
+│   ├── data/                   # Placeholder/fallback data
+│   │   ├── placeholderEvents.ts
+│   │   ├── placeholderNewsPosts.ts
+│   │   └── placeholderResources.ts
+│   ├── lib/                    # Shared utilities
+│   │   ├── design-tokens.ts    # Color & design constants
+│   │   ├── page-utils.ts       # Reusable page utilities (locale, metadata, data fetching)
+│   │   └── sanity.ts           # Sanity client & helpers
 │   └── proxy.ts                # Locale detection proxy (Next.js 16)
 ├── next.config.ts              # Next.js configuration
 ├── tailwind.config.ts          # Tailwind configuration
@@ -225,15 +265,18 @@ The site automatically switches layout direction based on locale:
    - Copy your Project ID (looks like: `abc123xyz`)
 
 3. **Configure environment variables:**
+
    ```bash
    cp .env.sample .env.local
    ```
+
    Then edit `.env.local` and add your Project ID:
+
    ```env
    # For Sanity Studio (automatically loaded by Sanity)
    SANITY_STUDIO_PROJECT_ID=your-actual-project-id
    SANITY_STUDIO_DATASET=production
-   
+
    # For Next.js (also needed for the website)
    NEXT_PUBLIC_SANITY_PROJECT_ID=your-actual-project-id
    NEXT_PUBLIC_SANITY_DATASET=production
@@ -253,6 +296,7 @@ npm run sanity:deploy
 **Sanity CLI Configuration:**
 
 The project includes `sanity.cli.js` in the root directory that:
+
 - Automatically loads your project ID from `.env.local`
 - Supports optional `SANITY_APP_ID` to prevent deployment prompts
 - Works with all Sanity CLI commands (`deploy`, `schema`, etc.)
@@ -272,12 +316,14 @@ This prevents Sanity from prompting for the application ID on future deploys.
 If you get an error: `"sanity.cli.js does not contain a project identifier"`:
 
 1. **Ensure `.env.local` exists** in the project root with your Sanity project ID:
+
    ```bash
    cp .env.sample .env.local
    # Then edit .env.local and add your actual project ID
    ```
 
 2. **Verify your project ID is set:**
+
    ```bash
    # Check if the config can read your project ID
    node -e "const config = require('./sanity.cli.js'); console.log('Project ID:', config.api.projectId);"
@@ -293,12 +339,13 @@ The `sanity.cli.js` file automatically loads your project ID and dataset from `.
 
 All content types support field-level localization (en, ckb, kmr):
 
-| Type            | Fields                                                              |
-| --------------- | ------------------------------------------------------------------- |
-| **Event**       | title, description, date, location, address, image, registrationUrl |
-| **News Post**   | title, body, mainImage, publishedAt, featured                       |
-| **Team Member** | name, role, photo, bio, email, linkedin, order                      |
-| **Resource**    | name, url, description, logo, category, order                       |
+| Type                  | Fields                                                              |
+| --------------------- | ------------------------------------------------------------------- |
+| **Event**             | title, description, date, location, address, image, registrationUrl |
+| **News Post**         | title, body, mainImage, publishedAt, featured, slug                 |
+| **Team Member**       | name, role, photo, bio, email, linkedin, order                      |
+| **Resource**          | name, url, description, logo, category, order                       |
+| **Historical Figure** | name, role, description, photo, color, order                        |
 
 ## 📱 Progressive Web App (PWA)
 
@@ -316,14 +363,14 @@ This website is a Progressive Web App, allowing users to install it on their dev
 Before deploying, you need to generate PWA icons:
 
 1. **Generate the source icon:**
-   
+
    The source icon is automatically generated from the Kurdish Sun logo:
-   
+
    ```bash
    # Generate 512x512 source icon (red background, gold sun)
    node scripts/generate-source-icon.js
    ```
-   
+
    This creates `public/icon-source.png` with the Kurdish Sun emblem on a red background.
 
 2. **Generate all PWA icon sizes:**
@@ -374,6 +421,7 @@ Before deploying, you need to generate PWA icons:
 **Quick Start:**
 
 1. **Ensure your code is pushed to GitHub:**
+
    ```bash
    git push origin main
    ```
@@ -403,11 +451,26 @@ Before deploying, you need to generate PWA icons:
    - Your site will be live!
 
 **Troubleshooting:**
+
 - **Can't see the project?** Make sure you're signed in with the GitHub account that owns the repository
 - **Repository not showing?** Check that Vercel has access to your GitHub repositories (Settings → Git → GitHub)
 - **Build fails?** Check the build logs in Vercel dashboard for specific errors
 
-For detailed deployment instructions, troubleshooting, and CLI deployment options, see [`VERCEL_DEPLOYMENT.md`](./VERCEL_DEPLOYMENT.md).
+**Quick Deploy via CLI (Alternative):**
+
+```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Login to Vercel
+vercel login
+
+# Deploy
+vercel
+
+# For production deployment
+vercel --prod
+```
 
 ### Other Platforms
 
@@ -435,14 +498,14 @@ pm2 start npm --name "dfwkurds" -- start
 
 ### Environment Variables
 
-| Variable                        | Required | Description                             |
-| ------------------------------- | -------- | --------------------------------------- |
-| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Yes      | Sanity project ID from sanity.io/manage |
-| `NEXT_PUBLIC_SANITY_DATASET`    | Yes      | Dataset name (usually `production`)     |
-| `NEXT_PUBLIC_SITE_URL`          | No       | Production site URL for sitemap/SEO     |
-| `SANITY_API_TOKEN`              | No       | Token for authenticated Sanity requests |
+| Variable                        | Required | Description                                                  |
+| ------------------------------- | -------- | ------------------------------------------------------------ |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Yes      | Sanity project ID from sanity.io/manage                      |
+| `NEXT_PUBLIC_SANITY_DATASET`    | Yes      | Dataset name (usually `production`)                          |
+| `NEXT_PUBLIC_SITE_URL`          | No       | Production site URL for sitemap/SEO                          |
+| `SANITY_API_TOKEN`              | No       | Token for authenticated Sanity requests                      |
 | `SANITY_APP_ID`                 | No       | Sanity Studio deployment app ID (prevents prompts on deploy) |
-| `REVALIDATE_SECRET`             | No       | Secret token for on-demand cache revalidation (see below) |
+| `REVALIDATE_SECRET`             | No       | Secret token for on-demand cache revalidation (see below)    |
 
 ### Customization
 
@@ -464,6 +527,7 @@ Create folder in `src/app/[locale]/` with `page.tsx`
 By default, the website caches Sanity content for 30 seconds in production. To see new content immediately after publishing in Sanity Studio, set up on-demand revalidation:
 
 1. **Generate a secret token:**
+
    ```bash
    openssl rand -hex 32
    ```
@@ -495,6 +559,169 @@ By default, the website caches Sanity content for 30 seconds in production. To s
 
 **Note:** Without the webhook, new content will appear after the cache expires (30 seconds) or when you manually redeploy.
 
+## 🐛 Troubleshooting
+
+### ⚠️ CRITICAL: Environment Variables Not Set
+
+**This is the #1 most common issue!** If you see this error:
+
+```
+Dataset "production" not found for project ID "your-project-id"
+```
+
+**This means `NEXT_PUBLIC_SANITY_PROJECT_ID` and `NEXT_PUBLIC_SANITY_DATASET` are not set in Vercel!**
+
+#### Quick Fix: Add Environment Variables to Vercel
+
+1. **Get your Sanity Project ID:**
+   - Go to [sanity.io/manage](https://www.sanity.io/manage)
+   - Select your project
+   - Copy the **Project ID** (looks like: `5d0aj8a7`)
+
+2. **Add to Vercel (REQUIRED):**
+   - Go to **Vercel Dashboard** → Your Project
+   - Click **Settings** → **Environment Variables**
+   - Click **"Add New"**
+   - Add these **two required variables**:
+     - **Key:** `NEXT_PUBLIC_SANITY_PROJECT_ID` | **Value:** Your actual Sanity Project ID
+     - **Key:** `NEXT_PUBLIC_SANITY_DATASET` | **Value:** `production`
+     - **Environment:** Select **Production**, **Preview**, and **Development** (or "All")
+   - Click **Save**
+
+3. **Redeploy (REQUIRED):**
+   - After adding variables, go to **Deployments** tab
+   - Click the **"..."** menu on the latest deployment
+   - Click **"Redeploy"**
+   - ⚠️ **Important:** Environment variables only take effect after redeploy!
+
+### Content Not Appearing on Production Site
+
+If you've added content in Sanity Studio but it's not showing on your Vercel production site:
+
+#### Step 1: Verify Content Requirements
+
+- **Content Must Be Published** - In Sanity Studio, make sure you clicked **"Publish"** (not just "Save")
+- **Required Fields Must Be Filled** - Check that all required fields are completed
+- **Event Date Must Be in the Future** - For events, the date must be `>= now()`
+
+#### Step 2: Check Cache Status
+
+The site caches content for 30 seconds. After publishing:
+
+- Wait 30 seconds and refresh the page
+- Or manually trigger revalidation (see below)
+
+#### Step 3: Manual Cache Revalidation
+
+**Option A: Via API Endpoint (Recommended)**
+
+1. **Get your revalidation secret:**
+   - Go to Vercel Dashboard → Your Project → Settings → Environment Variables
+   - Copy the value of `REVALIDATE_SECRET`
+
+2. **Trigger revalidation:**
+
+   ```bash
+   # Replace YOUR_SECRET and YOUR_DOMAIN with actual values
+   curl "https://YOUR_DOMAIN.vercel.app/api/revalidate?secret=YOUR_SECRET&path=/en/events"
+   ```
+
+3. **Revalidate all locales:**
+   ```bash
+   curl "https://YOUR_DOMAIN.vercel.app/api/revalidate?secret=YOUR_SECRET&path=/en/events"
+   curl "https://YOUR_DOMAIN.vercel.app/api/revalidate?secret=YOUR_SECRET&path=/sorani/events"
+   curl "https://YOUR_DOMAIN.vercel.app/api/revalidate?secret=YOUR_SECRET&path=/kurmanji/events"
+   ```
+
+**Option B: Redeploy on Vercel**
+
+1. Go to Vercel Dashboard → Your Project
+2. Click **"Redeploy"** → **"Redeploy"** (latest deployment)
+3. Wait for deployment to complete
+
+#### Step 4: Set Up Automatic Revalidation (Webhook)
+
+To automatically update the site when you publish content, set up a webhook (see "On-Demand Cache Revalidation" section above).
+
+#### Step 5: Debug in Production
+
+**Check Vercel function logs:**
+
+1. Go to Vercel Dashboard → Your Project
+2. Click **"Functions"** tab
+3. Find `/api/revalidate` function
+4. Check **"Logs"** for any errors
+
+**Check browser console:**
+
+1. Open your production site
+2. Open Developer Tools (F12)
+3. Check Console for any errors
+4. Look for `[Events] Fetched X events from Sanity` log message
+
+**Test the Sanity query directly:**
+
+1. Go to [sanity.io/manage](https://www.sanity.io/manage)
+2. Your Project → **API** → **Vision** (GROQ query tool)
+3. Run this query:
+   ```groq
+   *[_type == "event" && eventDate >= now()] | order(eventDate asc) {
+     _id,
+     title,
+     eventDate,
+     "isPublished": !(_id in path("drafts.**"))
+   }
+   ```
+4. Verify your content appears in the results
+
+### Common Issues
+
+**Issue:** Content has past date (for events)
+
+- **Solution:** Update the date to a future date in Sanity Studio
+
+**Issue:** Content is a draft
+
+- **Solution:** Click "Publish" button in Sanity Studio
+
+**Issue:** Cache not refreshing
+
+- **Solution:** Set up webhook (see "On-Demand Cache Revalidation" section) or manually revalidate
+
+**Issue:** Webhook not working
+
+- **Solution:**
+  - Verify `REVALIDATE_SECRET` is set in Vercel
+  - Check webhook secret matches Vercel secret
+  - Check Vercel function logs for errors
+  - Verify webhook URL is correct (no trailing slash)
+
+**Issue:** Build errors
+
+- **Solution:**
+  - Ensure all required environment variables are set
+  - Check for typos in variable names
+  - Check build logs in Vercel dashboard for specific errors
+
+**Issue:** PWA build warnings
+
+- **Solution:** These are normal and won't prevent deployment. Service worker files are generated during build.
+
+### Still Not Working?
+
+1. **Check Sanity project ID:**
+   - Verify `NEXT_PUBLIC_SANITY_PROJECT_ID` in Vercel matches your Sanity project
+   - Verify `NEXT_PUBLIC_SANITY_DATASET` is set to `production`
+
+2. **Check build logs:**
+   - Vercel Dashboard → Your Project → Deployments → Latest → Build Logs
+   - Look for any errors during build
+
+3. **Contact support:**
+   - Check Vercel function logs for specific error messages
+   - Check browser console for client-side errors
+   - Verify all environment variables are set correctly
+
 ## 📱 Browser Support
 
 - Chrome/Edge 90+
@@ -522,10 +749,17 @@ By default, the website caches Sanity content for 30 seconds in production. To s
 4. Push to branch: `git push origin feature/my-feature`
 5. Open a Pull Request
 
+## 📋 Release Information
+
+**Current Version:** 1.0.0 (Initial Release)  
+**Release Date:** December 10, 2025
+
+For version history, see [`CHANGELOG.md`](./CHANGELOG.md).
+
 ## 📄 License
 
-Copyright © 2024 Kurdish American Community Association of DFW. All rights reserved.
+Copyright © 2025 Kurdish American Community Association of DFW. All rights reserved.
 
 ---
 
-Built with ❤️ for the Kurdish community in Dallas-Fort Worth
+**Version 1.0.0** - Built with ❤️ for the Kurdish community in Dallas-Fort Worth

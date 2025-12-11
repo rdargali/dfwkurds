@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { KurdishSunIcon } from '@/components/layout/KurdishSunIcon'
 
 export default function OfflinePage() {
@@ -12,11 +13,11 @@ export default function OfflinePage() {
           </div>
         </div>
 
-        <h1 className="text-3xl font-bold text-slate-900 mb-4">You're Offline</h1>
+        <h1 className="text-3xl font-bold text-slate-900 mb-4">You&apos;re Offline</h1>
 
         <p className="text-lg text-slate-600 mb-8">
-          It looks like you've lost your internet connection. Don't worry, you can still browse
-          previously visited pages.
+          It looks like you&apos;ve lost your internet connection. Don&apos;t worry, you can still
+          browse previously visited pages.
         </p>
 
         <div className="space-y-4">
@@ -24,9 +25,9 @@ export default function OfflinePage() {
             Try Again
           </button>
 
-          <a href="/" className="btn btn-outline w-full inline-block">
+          <Link href="/" className="btn btn-outline w-full inline-block">
             Go to Homepage
-          </a>
+          </Link>
         </div>
       </div>
     </div>

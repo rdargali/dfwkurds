@@ -1,6 +1,6 @@
 import type { NextConfig } from 'next'
 import createNextIntlPlugin from 'next-intl/plugin'
-// @ts-ignore - next-pwa types may not be fully compatible with Next.js 16
+// @ts-expect-error - next-pwa types may not be fully compatible with Next.js 16
 import withPWA from 'next-pwa'
 
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts')

@@ -3,7 +3,7 @@ import { locales, defaultLocale, urlPathToLocale, type Locale } from './config'
 
 export default getRequestConfig(async ({ requestLocale }) => {
   // Get the locale from the request (could be SEO-friendly path like "sorani" or locale code like "ckb")
-  let localePath = await requestLocale
+  const localePath = await requestLocale
 
   // Map SEO-friendly URL path to internal locale code
   let locale: Locale = defaultLocale

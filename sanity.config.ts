@@ -6,7 +6,9 @@ import { schemaTypes } from './sanity/schemas'
 // Sanity automatically loads .env files and exposes variables with SANITY_STUDIO_ prefix
 // For compatibility with Next.js, we also check NEXT_PUBLIC_SANITY_PROJECT_ID
 const projectId =
-  process.env.SANITY_STUDIO_PROJECT_ID || process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'your-project-id'
+  process.env.SANITY_STUDIO_PROJECT_ID ||
+  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ||
+  'your-project-id'
 const dataset =
   process.env.SANITY_STUDIO_DATASET || process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
 
@@ -85,4 +87,3 @@ export default defineConfig({
     types: schemaTypes,
   },
 })
-

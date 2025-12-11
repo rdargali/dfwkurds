@@ -1,6 +1,6 @@
 /**
  * Generate Kurdish Sun Icon Source Image
- * 
+ *
  * Creates a 512x512 PNG icon based on the Kurdish Sun emblem
  * Uses the same design as the KurdishSunIcon React component
  */
@@ -50,19 +50,16 @@ function createKurdishSunSVG(size) {
 async function generateIcon() {
   try {
     console.log('🎨 Generating Kurdish Sun icon source image...')
-    
+
     // Create SVG
     const svg = createKurdishSunSVG(size)
-    
+
     // Convert SVG to PNG using sharp
-    const buffer = await sharp(Buffer.from(svg))
-      .resize(size, size)
-      .png()
-      .toBuffer()
-    
+    const buffer = await sharp(Buffer.from(svg)).resize(size, size).png().toBuffer()
+
     // Write to file
     fs.writeFileSync(outputPath, buffer)
-    
+
     console.log(`✅ Generated: ${outputPath}`)
     console.log(`📐 Size: ${size}x${size}px`)
     console.log('\n✨ Icon source created successfully!')
@@ -77,4 +74,3 @@ async function generateIcon() {
 }
 
 generateIcon()
-

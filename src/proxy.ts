@@ -1,13 +1,13 @@
 import createMiddleware from 'next-intl/middleware'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
-import { locales, defaultLocale, urlPaths, localeToUrlPath, urlPathToLocale } from './i18n/config'
+import { urlPaths, localeToUrlPath } from './i18n/config'
 
 // Use SEO-friendly paths as the primary locales for next-intl
 // Map: sorani -> ckb, kurmanji -> kmr internally
 const middleware = createMiddleware({
-  locales: urlPaths as any,
-  defaultLocale,
+  locales: [...urlPaths],
+  defaultLocale: 'en' as const,
   localePrefix: 'as-needed',
   // Custom locale detection to map SEO paths to locale codes
   localeDetection: false, // Disable automatic detection

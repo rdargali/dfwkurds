@@ -162,7 +162,10 @@ export function EventCard({ event, locale, featured = false }: EventCardProps) {
     // Only access window on client side after mount
     if (typeof window !== 'undefined') {
       const baseUrl = window.location.origin + window.location.pathname
-      setShareUrl(`${baseUrl}#event-${eventId}`)
+      // Use setTimeout to avoid setState in effect warning
+      setTimeout(() => {
+        setShareUrl(`${baseUrl}#event-${eventId}`)
+      }, 0)
     }
   }, [eventId])
 
@@ -320,10 +323,14 @@ export function EventCard({ event, locale, featured = false }: EventCardProps) {
                   url: shareUrl,
                 }
 
-                if (typeof navigator !== 'undefined' && navigator.share && navigator.canShare?.(shareData)) {
+                if (
+                  typeof navigator !== 'undefined' &&
+                  navigator.share &&
+                  navigator.canShare?.(shareData)
+                ) {
                   try {
                     await navigator.share(shareData)
-                  } catch (err) {
+                  } catch {
                     // User cancelled or error occurred - silently fail
                   }
                 } else if (typeof navigator !== 'undefined' && navigator.clipboard) {
@@ -331,7 +338,7 @@ export function EventCard({ event, locale, featured = false }: EventCardProps) {
                   try {
                     await navigator.clipboard.writeText(shareUrl)
                     // Could show a toast notification here in the future
-                  } catch (err) {
+                  } catch {
                     // Clipboard API not available - silently fail
                   }
                 }

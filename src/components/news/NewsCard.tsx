@@ -19,7 +19,10 @@ function formatDate(dateStr: string, locale: string): string {
     month: 'long',
     day: 'numeric',
   }
-  return date.toLocaleDateString(locale === 'ckb' ? 'ar' : locale === 'kmr' ? 'ku' : 'en-US', options)
+  return date.toLocaleDateString(
+    locale === 'ckb' ? 'ar' : locale === 'kmr' ? 'ku' : 'en-US',
+    options
+  )
 }
 
 export function NewsCard({ newsPost, locale, featured = false }: NewsCardProps) {
@@ -31,9 +34,7 @@ export function NewsCard({ newsPost, locale, featured = false }: NewsCardProps) 
   return (
     <article
       className={`card p-6 border-t-4 ${
-        featured
-          ? 'border-t-kurd-gold hover:shadow-lg'
-          : 'border-t-cyan-500 hover:shadow-md'
+        featured ? 'border-t-kurd-gold hover:shadow-lg' : 'border-t-cyan-500 hover:shadow-md'
       } hover:translate-y-[-2px] transition-all`}
     >
       <div className="flex flex-col md:flex-row gap-6">
@@ -111,4 +112,3 @@ export function NewsCard({ newsPost, locale, featured = false }: NewsCardProps) 
     </article>
   )
 }
-
