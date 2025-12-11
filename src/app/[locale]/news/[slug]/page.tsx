@@ -5,7 +5,6 @@ import { PortableText } from '@portabletext/react'
 import type { PortableTextBlock } from '@portabletext/types'
 import type { NewsPost } from '@/lib/sanity'
 import { getSanityData, getLocalizedValue, urlFor } from '@/lib/sanity'
-import { generatePageMetadata } from '@/lib/page-utils'
 import { setRequestLocale } from 'next-intl/server'
 import { placeholderNewsPosts } from '@/data/placeholderNewsPosts'
 import { urlPathToLocale, type Locale } from '@/i18n/config'
@@ -32,9 +31,17 @@ function extractTextFromBlocks(blocks: PortableTextBlock[] | undefined): string 
     .map(block => {
       if ('children' in block && Array.isArray(block.children)) {
         return block.children
-          .filter(child => child && typeof child === 'object' && '_type' in child && child._type === 'span')
+          .filter(
+            child =>
+              child && typeof child === 'object' && '_type' in child && child._type === 'span'
+          )
           .map(child => {
-            if (child && typeof child === 'object' && 'text' in child && typeof child.text === 'string') {
+            if (
+              child &&
+              typeof child === 'object' &&
+              'text' in child &&
+              typeof child.text === 'string'
+            ) {
               return child.text
             }
             return ''
@@ -82,9 +89,7 @@ export async function generateStaticParams() {
 // Allow dynamic params for posts not generated at build time
 export const dynamicParams = true
 
-export async function generateMetadata({
-  params,
-}: NewsPostDetailProps): Promise<Metadata> {
+export async function generateMetadata({ params }: NewsPostDetailProps): Promise<Metadata> {
   const { locale: localeParam, slug } = await params
   const locale = urlPathToLocale[localeParam] || (localeParam as Locale)
 
@@ -196,9 +201,7 @@ export default async function NewsPostDetailPage({ params }: NewsPostDetailProps
         </div>
 
         {/* Title */}
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
-          {title}
-        </h1>
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-6">{title}</h1>
       </header>
 
       {/* Main Image */}
@@ -241,7 +244,11 @@ export default async function NewsPostDetailPage({ params }: NewsPostDetailProps
               d="M10 19l-7-7m0 0l7-7m-7 7h18"
             />
           </svg>
-          {locale === 'ckb' ? 'گەڕانەوە بۆ هەواڵەکان' : locale === 'kmr' ? 'Vegere nûçeyan' : 'Back to News'}
+          {locale === 'ckb'
+            ? 'گەڕانەوە بۆ هەواڵەکان'
+            : locale === 'kmr'
+              ? 'Vegere nûçeyan'
+              : 'Back to News'}
         </a>
       </div>
     </article>
