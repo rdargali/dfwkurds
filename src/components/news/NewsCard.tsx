@@ -27,8 +27,8 @@ function formatDate(dateStr: string, locale: string): string {
 
 export function NewsCard({ newsPost, locale, featured = false }: NewsCardProps) {
   const t = useTranslations('news')
-  const title = getLocalizedValue(newsPost.title, locale)
-  const urlPath = locale === 'ckb' ? 'ckb' : locale === 'kmr' ? 'kmr' : 'en'
+  const title = getLocalizedValue(newsPost.title, locale) || 'News Post'
+  const urlPath = locale === 'ckb' ? 'sorani' : locale === 'kmr' ? 'kurmanji' : 'en'
   const href = `/${urlPath}/news/${newsPost.slug.current}`
 
   return (
@@ -44,7 +44,7 @@ export function NewsCard({ newsPost, locale, featured = false }: NewsCardProps) 
             <Link href={href}>
               <Image
                 src={urlFor(newsPost.mainImage.asset).width(512).height(320).url()}
-                alt={getLocalizedValue(newsPost.mainImage.alt, locale) || title}
+                alt={getLocalizedValue(newsPost.mainImage.alt, locale) || title || 'News image'}
                 width={512}
                 height={320}
                 className="w-full h-48 md:h-full object-cover hover:scale-105 transition-transform duration-300"
