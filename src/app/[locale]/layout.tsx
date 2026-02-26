@@ -49,7 +49,7 @@ export async function generateMetadata({
   const locale = urlPathToLocale[localeParam] || (localeParam as Locale)
 
   const titles: Record<string, string> = {
-    en: 'Kurdish American Community Association of DFW',
+    en: 'Kurdish American Community Center of Dallas-Fort Worth',
     ckb: 'کۆمەڵەی ئەمریکی-کوردی لە دالاس-فۆرت وێرس',
     kmr: 'Komeleya Kurdan a Amerîkî ya Dallas-Fort Worth',
   }
@@ -77,7 +77,7 @@ export async function generateMetadata({
       'ئەمریکا',
       'Kurdistan',
     ],
-    authors: [{ name: 'Kurdish American Community Association of DFW' }],
+    authors: [{ name: 'Kurdish American Community Center of Dallas-Fort Worth' }],
     openGraph: {
       type: 'website',
       locale: locale === 'ckb' ? 'ckb_IQ' : locale === 'kmr' ? 'ku_TR' : 'en_US',

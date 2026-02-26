@@ -21,7 +21,7 @@ if (projectId === 'your-project-id') {
 
 export default defineConfig({
   name: 'dfwkurds',
-  title: 'DFW Kurds - Kurdish American Community Association',
+  title: 'DFW Kurds - Kurdish American Community Center',
 
   projectId,
   dataset,

@@ -1,6 +1,6 @@
-# Kurdish American Community Association of DFW
+# Kurdish American Community Center of Dallas-Fort Worth
 
-A high-performance, mobile-first, culturally sensitive multilingual website for the Kurdish American Community Association of Dallas-Fort Worth.
+A high-performance, mobile-first, culturally sensitive multilingual website for the Kurdish American Community Center of Dallas-Fort Worth.
 
 **Version:** 1.0.0 (Initial Release)  
 **Release Date:** December 2025
@@ -758,7 +758,7 @@ For version history, see [`CHANGELOG.md`](./CHANGELOG.md).
 
 ## 📄 License
 
-Copyright © 2025 Kurdish American Community Association of DFW. All rights reserved.
+Copyright © 2025 Kurdish American Community Center of Dallas-Fort Worth. All rights reserved.
 
 ---
 

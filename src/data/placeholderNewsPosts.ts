@@ -24,7 +24,7 @@ export const placeholderNewsPosts: NewsPost[] = [
             {
               _type: 'span',
               _key: 'span1',
-              text: 'The Kurdish American Community Association of DFW celebrated Newroz 2026 with an incredible gathering of over 500 community members. The event featured traditional Kurdish music, dance performances, and delicious food.',
+              text: 'The Kurdish American Community Center of Dallas-Fort Worth celebrated Newroz 2026 with an incredible gathering of over 500 community members. The event featured traditional Kurdish music, dance performances, and delicious food.',
               marks: [],
             },
           ],

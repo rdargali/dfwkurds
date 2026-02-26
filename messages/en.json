@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "title": "Kurdish American Community Association of DFW",
+    "title": "Kurdish American Community Center of Dallas-Fort Worth",
     "description": "Preserving Kurdish heritage and empowering the Kurdish community in the Dallas-Fort Worth area."
   },
   "navigation": {
@@ -13,7 +13,7 @@
   },
   "home": {
     "hero": {
-      "title": "Kurdish American Community Association",
+      "title": "Kurdish American Community Center",
       "subtitle": "of Dallas-Fort Worth",
       "description": "Uniting and empowering the Kurdish community through cultural preservation, education, and community services.",
       "cta": "Learn More",
@@ -82,7 +82,7 @@
     "language": "Language"
   },
   "footer": {
-    "copyright": "© {year} Kurdish American Community Association of DFW. All rights reserved.",
+    "copyright": "© {year} Kurdish American Community Center of Dallas-Fort Worth. All rights reserved.",
     "contact": {
       "title": "Contact Us",
       "email": "Email",

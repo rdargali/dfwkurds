@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### 🎉 Initial Release
 
-This is the first public release of the Kurdish American Community Association of DFW website.
+This is the first public release of the Kurdish American Community Center of Dallas-Fort Worth website.
 
 ### ✨ Features
 
