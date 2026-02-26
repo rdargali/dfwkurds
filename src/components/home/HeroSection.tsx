@@ -1,9 +1,9 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { useTranslations, useLocale } from 'next-intl'
 import { getUrlPath, type Locale } from '@/i18n/config'
-import { KurdishSunIcon } from '@/components/layout/KurdishSunIcon'
 
 export function HeroSection() {
   const t = useTranslations('home.hero')
@@ -37,11 +37,16 @@ export function HeroSection() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
         <div className="flex flex-col items-center text-center">
-          {/* Sun Emblem */}
+          {/* KACC Logo */}
           <div className="mb-8 animate-scale-in">
-            <div className="w-20 h-20 md:w-28 md:h-28 rounded-2xl bg-gradient-to-br from-kurd-gold via-kurd-gold to-kurd-gold-dark flex items-center justify-center shadow-2xl shadow-kurd-gold/30 transform hover:scale-105 transition-transform">
-              <KurdishSunIcon className="w-12 h-12 md:w-16 md:h-16 text-slate-900" />
-            </div>
+            <Image
+              src="/kacc-logo.png"
+              alt="Kurdish American Community Center"
+              width={150}
+              height={150}
+              className="w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-2xl hover:scale-105 transition-transform"
+              priority
+            />
           </div>
 
           {/* Badge */}

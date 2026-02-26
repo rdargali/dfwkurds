@@ -1,9 +1,9 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { useTranslations, useLocale } from 'next-intl'
 import { getUrlPath, type Locale } from '@/i18n/config'
-import { KurdishSunIcon } from './KurdishSunIcon'
 
 export function Footer() {
   const t = useTranslations()
@@ -29,9 +29,13 @@ export function Footer() {
           <div>
             <div className="flex items-center gap-3 mb-5">
               {/* Logo */}
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-kurd-gold to-kurd-gold-dark flex items-center justify-center shadow-lg shadow-kurd-gold/20">
-                <KurdishSunIcon className="w-7 h-7 text-slate-900" />
-              </div>
+              <Image
+                src="/kacc-logo.png"
+                alt="Kurdish American Community Center"
+                width={48}
+                height={48}
+                className="w-12 h-12 object-contain"
+              />
               <div>
                 <p className="font-semibold text-white">
                   {locale === 'ckb'

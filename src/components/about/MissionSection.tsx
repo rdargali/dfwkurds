@@ -1,7 +1,7 @@
 'use client'
 
+import Image from 'next/image'
 import { useTranslations, useLocale } from 'next-intl'
-import { KurdishSunIcon } from '@/components/layout/KurdishSunIcon'
 
 export function MissionSection() {
   const t = useTranslations('about')
@@ -98,9 +98,13 @@ export function MissionSection() {
         {/* Page header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
           <div className="flex justify-center mb-6">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-kurd-gold to-kurd-gold-dark flex items-center justify-center shadow-lg shadow-kurd-gold/20">
-              <KurdishSunIcon className="w-9 h-9 text-slate-900" />
-            </div>
+            <Image
+              src="/kacc-logo.png"
+              alt="Kurdish American Community Center"
+              width={100}
+              height={100}
+              className="w-20 h-20 md:w-24 md:h-24 object-contain drop-shadow-lg"
+            />
           </div>
           <span className="inline-block px-4 py-1.5 rounded-full bg-kurd-red/10 text-kurd-red text-sm font-semibold mb-4">
             {locale === 'ckb' ? 'دەربارەی ئێمە' : locale === 'kmr' ? 'Derbarê Me' : 'About Us'}

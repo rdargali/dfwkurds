@@ -1,16 +1,20 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
-import { KurdishSunIcon } from '@/components/layout/KurdishSunIcon'
 
 export default function OfflinePage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
       <div className="max-w-md w-full text-center">
         <div className="mb-8 flex justify-center">
-          <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-kurd-gold to-kurd-gold-dark flex items-center justify-center shadow-lg shadow-kurd-gold/20">
-            <KurdishSunIcon className="w-14 h-14 text-slate-900" />
-          </div>
+          <Image
+            src="/kacc-logo.png"
+            alt="Kurdish American Community Center"
+            width={100}
+            height={100}
+            className="w-24 h-24 object-contain drop-shadow-lg"
+          />
         </div>
 
         <h1 className="text-3xl font-bold text-slate-900 mb-4">You&apos;re Offline</h1>

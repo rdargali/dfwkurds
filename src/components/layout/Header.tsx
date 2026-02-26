@@ -1,12 +1,12 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useTranslations, useLocale } from 'next-intl'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { getUrlPath, type Locale } from '@/i18n/config'
 import { LanguageSwitcher } from './LanguageSwitcher'
-import { KurdishSunIcon } from './KurdishSunIcon'
 
 export function Header() {
   const t = useTranslations('navigation')
@@ -39,10 +39,15 @@ export function Header() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link href={`/${urlPath}`} className="flex items-center gap-3 group">
-            {/* Kurdish Sun Symbol */}
-            <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-kurd-gold to-kurd-gold-dark flex items-center justify-center shadow-lg shadow-kurd-gold/20 group-hover:shadow-kurd-gold/40 transition-shadow">
-              <KurdishSunIcon className="w-6 h-6 md:w-7 md:h-7 text-slate-900" />
-            </div>
+            {/* KACC Logo */}
+            <Image
+              src="/kacc-logo.png"
+              alt="Kurdish American Community Center Logo"
+              width={50}
+              height={50}
+              className="w-12 h-12 md:w-14 md:h-14 object-contain"
+              priority
+            />
             <div className="hidden sm:block">
               <p className="text-sm md:text-base font-semibold text-white leading-tight">
                 {locale === 'ckb'
