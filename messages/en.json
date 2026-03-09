@@ -9,7 +9,20 @@
     "events": "Events",
     "resources": "Resources",
     "news": "News",
+    "social": "Social",
     "contact": "Contact"
+  },
+  "social": {
+    "title": "Social Media",
+    "description": "Stay connected with our community through social media",
+    "facebook": {
+      "title": "Follow us on Facebook",
+      "subtitle": "Get the latest updates, events, and community news"
+    },
+    "instagram": {
+      "title": "Follow us on Instagram",
+      "subtitle": "See our photos, stories, and behind-the-scenes content"
+    }
   },
   "home": {
     "hero": {

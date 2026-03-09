@@ -16,14 +16,6 @@ export function HeroSection() {
     kmr: 'Bi xêr hatî Civaka Kurdî',
   }
 
-  const statsLabels: Record<string, { years: string; families: string; events: string }> = {
-    en: { years: 'Years of Service', families: 'Kurdish Families', events: 'Annual Events' },
-    ckb: { years: 'ساڵ خزمەتگوزاری', families: 'خێزانی کوردی', events: 'چالاکی ساڵانە' },
-    kmr: { years: 'Sal Xizmet', families: 'Malbatên Kurd', events: 'Bûyerên Salane' },
-  }
-
-  const stats = statsLabels[locale] || statsLabels.en
-
   return (
     <section className="relative min-h-[85vh] md:min-h-[80vh] flex items-center hero-dark overflow-hidden">
       {/* Animated Golden Sun Glow */}
@@ -95,22 +87,6 @@ export function HeroSection() {
                 />
               </svg>
             </Link>
-          </div>
-
-          {/* Stats - Larger and more prominent */}
-          <div className="flex flex-wrap justify-center gap-10 md:gap-16 mt-16 pt-10 border-t border-white/10 animate-slide-up delay-300">
-            <div className="text-center">
-              <p className="text-4xl md:text-5xl font-extrabold text-kurd-red">30+</p>
-              <p className="text-base text-slate-300 mt-2 font-medium">{stats.years}</p>
-            </div>
-            <div className="text-center">
-              <p className="text-4xl md:text-5xl font-extrabold text-kurd-green">1000+</p>
-              <p className="text-base text-slate-300 mt-2 font-medium">{stats.families}</p>
-            </div>
-            <div className="text-center">
-              <p className="text-4xl md:text-5xl font-extrabold text-kurd-gold">50+</p>
-              <p className="text-base text-slate-300 mt-2 font-medium">{stats.events}</p>
-            </div>
           </div>
         </div>
       </div>

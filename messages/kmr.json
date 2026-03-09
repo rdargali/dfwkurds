@@ -9,7 +9,20 @@
     "events": "Bûyer",
     "resources": "Çavkanî",
     "news": "Nûçe",
+    "social": "Sosyal",
     "contact": "Têkilî"
+  },
+  "social": {
+    "title": "Medya Sosyal",
+    "description": "Bi medya sosyal re bi civaka me re bimînin",
+    "facebook": {
+      "title": "Li ser Facebookê me bişopînin",
+      "subtitle": "Nûçeyên dawî, bûyer û nûçeyên civakê bistînin"
+    },
+    "instagram": {
+      "title": "Li ser Instagramê me bişopînin",
+      "subtitle": "Wêneyên me bibînin, çîrokên me û naveroka pişt perdeyan"
+    }
   },
   "home": {
     "hero": {

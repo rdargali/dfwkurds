@@ -17,9 +17,10 @@ export function Header() {
 
   const navItems = [
     { href: `/${urlPath}`, label: t('home') },
+    { href: `/${urlPath}/about`, label: t('about') },
     { href: `/${urlPath}/events`, label: t('events') },
     { href: `/${urlPath}/news`, label: t('news') },
-    { href: `/${urlPath}/about`, label: t('about') },
+    { href: `/${urlPath}/social`, label: t('social') },
     { href: `/${urlPath}/resources`, label: t('resources') },
   ]
 
@@ -54,14 +55,14 @@ export function Header() {
                   ? 'کۆمەڵەی کوردی'
                   : locale === 'kmr'
                     ? 'Komeleya Kurdan'
-                    : 'Kurdish American'}
+                    : 'Kurdish American Community Center'}
               </p>
               <p className="text-xs md:text-sm text-slate-400 leading-tight">
                 {locale === 'ckb'
                   ? 'دالاس-فۆرت وێرس'
                   : locale === 'kmr'
                     ? 'Civaka DFW'
-                    : 'DFW Community'}
+                    : 'North Texas'}
               </p>
             </div>
           </Link>
