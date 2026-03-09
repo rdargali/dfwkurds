@@ -19,19 +19,12 @@ export function EventsList({ events, locale }: EventsListProps) {
     <section className="py-16 md:py-24 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page header */}
-        <div className="text-center mb-12 md:mb-16">
-          <span className="inline-block px-4 py-2 rounded-full bg-kurd-red/10 text-kurd-red text-sm font-semibold mb-5">
-            {locale === 'ckb'
-              ? 'چالاکییەکانی کۆمەڵگا'
-              : locale === 'kmr'
-                ? 'Bûyerên Civakî'
-                : 'Community Events'}
-          </span>
-          <h1 className="page-title mb-5">{t('title')}</h1>
-          <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            {t('subtitle')}
-          </p>
-        </div>
+          <div className="text-center mb-12 md:mb-16">
+            <h1 className="page-title mb-5">{t('title')}</h1>
+            <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+              {t('subtitle')}
+            </p>
+          </div>
 
         {/* Event Count */}
         <div className="flex items-center justify-center gap-2 text-slate-600 mb-10">

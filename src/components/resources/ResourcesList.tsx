@@ -161,19 +161,12 @@ export function ResourcesList({ resources, locale }: ResourcesListProps) {
     <section className="py-16 md:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page header */}
-        <div className="text-center mb-12 md:mb-16">
-          <span className="inline-block px-4 py-2 rounded-full bg-kurd-green/10 text-kurd-green font-semibold mb-5">
-            {locale === 'ckb'
-              ? 'سەرچاوە بەسوودەکان'
-              : locale === 'kmr'
-                ? 'Çavkaniyên Alîkar'
-                : 'Helpful Resources'}
-          </span>
-          <h1 className="page-title mb-5">{t('title')}</h1>
-          <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            {t('subtitle')}
-          </p>
-        </div>
+          <div className="text-center mb-12 md:mb-16">
+            <h1 className="page-title mb-5">{t('title')}</h1>
+            <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+              {t('subtitle')}
+            </p>
+          </div>
 
         {/* Quick Jump Navigation for categories */}
         <div className="flex flex-wrap justify-center gap-2 mb-12 p-4 bg-slate-50 rounded-2xl">

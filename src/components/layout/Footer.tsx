@@ -35,14 +35,14 @@ export function Footer() {
                     ? 'کۆمەڵەی کوردی'
                     : locale === 'kmr'
                       ? 'Komeleya Kurdan'
-                      : 'Kurdish American'}
+                      : 'Kurdish American Community Center'}
                 </p>
                 <p className="text-sm text-slate-400">
                   {locale === 'ckb'
                     ? 'دالاس-فۆرت وێرس'
                     : locale === 'kmr'
                       ? 'Civaka DFW'
-                      : 'DFW Community'}
+                      : 'North Texas'}
                 </p>
               </div>
             </div>
@@ -59,6 +59,24 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-kurd-gold mb-5">{t('footer.contact.title')}</h3>
             <ul className="space-y-4">
+                            <li className="flex items-start gap-3">
+                              <div className="w-8 h-8 rounded-lg bg-kurd-gold/10 flex items-center justify-center shrink-0">
+                                <svg
+                                  className="w-4 h-4 text-kurd-gold"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M17 9V2H7v7M7 9v13h10V9M7 9h10"
+                                  />
+                                </svg>
+                              </div>
+                              <span className="text-sm text-slate-400">1059 South Sherman Street Suite 105, Richardson, TX, United States, 75081</span>
+                            </li>
               <li className="flex items-start gap-3">
                 <div className="w-8 h-8 rounded-lg bg-kurd-red/10 flex items-center justify-center shrink-0">
                   <svg
@@ -81,30 +99,6 @@ export function Footer() {
                 >
                   kurd.kacc@gmail.com
                 </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-kurd-green/10 flex items-center justify-center shrink-0">
-                  <svg
-                    className="w-4 h-4 text-kurd-green"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
-                </div>
-                <span className="text-sm text-slate-400">Dallas-Fort Worth, Texas</span>
               </li>
             </ul>
 

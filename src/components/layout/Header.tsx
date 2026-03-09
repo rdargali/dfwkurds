@@ -19,7 +19,7 @@ export function Header() {
     { href: `/${urlPath}`, label: t('home') },
     { href: `/${urlPath}/about`, label: t('about') },
     { href: `/${urlPath}/events`, label: t('events') },
-    { href: `/${urlPath}/news`, label: t('news') },
+    // { href: `/${urlPath}/news`, label: t('news') }, // News tab hidden
     { href: `/${urlPath}/social`, label: t('social') },
     { href: `/${urlPath}/resources`, label: t('resources') },
   ]

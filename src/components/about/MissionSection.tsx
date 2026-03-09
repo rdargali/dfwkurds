@@ -97,18 +97,7 @@ export function MissionSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="flex justify-center mb-6">
-            <Image
-              src="/kacc-logo.png"
-              alt="Kurdish American Community Center"
-              width={100}
-              height={100}
-              className="w-20 h-20 md:w-24 md:h-24 object-contain drop-shadow-lg"
-            />
-          </div>
-          <span className="inline-block px-4 py-1.5 rounded-full bg-kurd-red/10 text-kurd-red text-sm font-semibold mb-4">
-            {locale === 'ckb' ? 'دەربارەی ئێمە' : locale === 'kmr' ? 'Derbarê Me' : 'About Us'}
-          </span>
+          {/* Removed About Us badge */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-5">
             {t('title')}
           </h1>
