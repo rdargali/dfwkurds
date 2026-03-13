@@ -46,7 +46,7 @@ export function Header() {
               alt="Kurdish American Community Center Logo"
               width={50}
               height={50}
-              className="w-12 h-12 md:w-14 md:h-14 object-contain"
+              className="w-12 h-12 md:w-14 md:h-14 object-contain bg-transparent"
               priority
             />
             <div className="hidden sm:block">
@@ -57,13 +57,7 @@ export function Header() {
                     ? 'Komeleya Kurdan'
                     : 'Kurdish American Community Center'}
               </p>
-              <p className="text-xs md:text-sm text-slate-400 leading-tight">
-                {locale === 'ckb'
-                  ? 'دالاس-فۆرت وێرس'
-                  : locale === 'kmr'
-                    ? 'Civaka DFW'
-                    : 'North Texas'}
-              </p>
+              {/* Removed 'North Texas' as requested */}
             </div>
           </Link>
 

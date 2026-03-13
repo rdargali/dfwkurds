@@ -11,9 +11,9 @@ export function HeroSection() {
   const urlPath = getUrlPath(locale)
 
   const welcomeText: Record<string, string> = {
-    en: 'Welcome to the Kurdish Community',
-    ckb: 'بە خێر بێیت بۆ کۆمەڵگای کوردی',
-    kmr: 'Bi xêr hatî Civaka Kurdî',
+    en: '',
+    ckb: '',
+    kmr: '',
   }
 
   return (
@@ -36,16 +36,13 @@ export function HeroSection() {
               alt="Kurdish American Community Center"
               width={150}
               height={150}
-              className="w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-2xl hover:scale-105 transition-transform"
+              className="w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-2xl hover:scale-105 transition-transform bg-transparent"
               priority
             />
           </div>
 
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kurd-green/20 border border-kurd-green/30 text-kurd-green-light text-sm font-medium mb-6 animate-fade-in">
-            <span className="w-2 h-2 rounded-full bg-kurd-green animate-pulse" />
-            {welcomeText[locale] || welcomeText.en}
-          </div>
+          {/* Welcome text removed as requested */}
 
           {/* Title */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-6 animate-slide-up">

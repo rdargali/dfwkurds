@@ -27,7 +27,7 @@ export function Footer() {
                 alt="Kurdish American Community Center"
                 width={48}
                 height={48}
-                className="w-12 h-12 object-contain"
+                className="w-12 h-12 object-contain bg-transparent"
               />
               <div>
                 <p className="font-semibold text-white">
@@ -37,13 +37,7 @@ export function Footer() {
                       ? 'Komeleya Kurdan'
                       : 'Kurdish American Community Center'}
                 </p>
-                <p className="text-sm text-slate-400">
-                  {locale === 'ckb'
-                    ? 'دالاس-فۆرت وێرس'
-                    : locale === 'kmr'
-                      ? 'Civaka DFW'
-                      : 'North Texas'}
-                </p>
+                {/* Removed 'North Texas' as requested */}
               </div>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed">
