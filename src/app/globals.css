@@ -135,12 +135,12 @@ body {
   height: 4px;
   background: linear-gradient(
     90deg,
-    var(--kurd-red) 0%,
-    var(--kurd-red) 33.33%,
-    var(--white) 33.33%,
-    var(--white) 66.66%,
-    var(--kurd-green) 66.66%,
-    var(--kurd-green) 100%
+    var(--kurd-green) 0%,
+    var(--kurd-green) 33.33%,
+    var(--kurd-gold) 33.33%,
+    var(--kurd-gold) 66.66%,
+    var(--kurd-red) 66.66%,
+    var(--kurd-red) 100%
   );
 }
 
@@ -148,12 +148,12 @@ body {
   height: 2px;
   background: linear-gradient(
     90deg,
-    var(--kurd-red) 0%,
-    var(--kurd-red) 33.33%,
-    var(--white) 33.33%,
-    var(--white) 66.66%,
-    var(--kurd-green) 66.66%,
-    var(--kurd-green) 100%
+    var(--kurd-green) 0%,
+    var(--kurd-green) 33.33%,
+    var(--kurd-gold) 33.33%,
+    var(--kurd-gold) 66.66%,
+    var(--kurd-red) 66.66%,
+    var(--kurd-red) 100%
   );
 }
 
@@ -183,23 +183,6 @@ body {
   position: relative;
 }
 
-.hero-dark::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(
-    90deg,
-    var(--kurd-red) 0%,
-    var(--kurd-red) 33.33%,
-    rgba(255, 255, 255, 0.9) 33.33%,
-    rgba(255, 255, 255, 0.9) 66.66%,
-    var(--kurd-green) 66.66%,
-    var(--kurd-green) 100%
-  );
-}
 
 /* Card Styles */
 .card {

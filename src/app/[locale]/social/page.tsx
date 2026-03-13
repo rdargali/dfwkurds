@@ -60,16 +60,7 @@ export default async function SocialPage({ params }: { params: Promise<{ locale:
                 data-adapt-container-width="true"
                 data-hide-cover="false"
                 data-show-facepile="true"
-              >
-                <blockquote
-                  cite="https://www.facebook.com/kurdishamericancommunitycenter"
-                  className="fb-xfbml-parse-ignore"
-                >
-                  <a href="https://www.facebook.com/kurdishamericancommunitycenter">
-                    Kurdish American Community Center
-                  </a>
-                </blockquote>
-              </div>
+              ></div>
             </div>
           </div>
 
@@ -201,10 +192,10 @@ export default async function SocialPage({ params }: { params: Promise<{ locale:
         crossOrigin="anonymous"
         src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0"
         nonce="facebook-jssdk"
-      />
+      ></script>
 
       {/* Instagram SDK Script */}
-      <script async src="https://www.instagram.com/embed.js" />
+      <script async src="https://www.instagram.com/embed.js"></script>
     </div>
   )
 }
