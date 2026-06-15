@@ -16,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const route of routes) {
       entries.push({
         url: `${baseUrl}/${urlPath}${route}`,
-        // Static sitemap entries for export — avoid dynamic `lastModified`
+        lastModified: new Date(),
         changeFrequency: route === '' ? 'weekly' : 'monthly',
         priority: route === '' ? 1 : 0.8,
       })
