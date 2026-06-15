@@ -19,6 +19,8 @@ const nextConfig: NextConfig = {
 
   // Strict mode for better development experience
   reactStrictMode: true,
+  // Static export mode for GitHub Pages
+  output: 'export',
 }
 
 // Configure PWA

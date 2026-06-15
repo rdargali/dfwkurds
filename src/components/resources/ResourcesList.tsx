@@ -154,8 +154,9 @@ export function ResourcesList({ resources, locale }: ResourcesListProps) {
     {} as Record<Category, Resource[]>
   )
 
-  // Only show the 'news' category
-  const activeCategories = groupedResources['news'] && groupedResources['news'].length > 0 ? ['news'] : []
+  // Only show the 'news' category (typed as `Category[]` for TS)
+  const activeCategories: Category[] =
+    groupedResources['news'] && groupedResources['news'].length > 0 ? ['news'] : []
 
   return (
     <section className="py-16 md:py-24 bg-white">
@@ -201,7 +202,7 @@ export function ResourcesList({ resources, locale }: ResourcesListProps) {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {groupedResources[category].map(resource => (
+                  {(groupedResources[category] ?? []).map(resource => (
                     <ResourceCard
                       key={resource._id}
                       resource={resource}

@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next build && next export",
+    "deploy:ghpages": "npm run export && npx gh-pages -d out",
     "start": "next start",
     "lint": "eslint",
     "format": "prettier --write .",
@@ -35,6 +37,7 @@
     "prettier": "^3.7.4",
     "sharp": "^0.34.5",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "gh-pages": "^5.0.0"
   }
 }
