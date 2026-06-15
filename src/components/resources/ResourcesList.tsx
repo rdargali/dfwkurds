@@ -155,7 +155,7 @@ export function ResourcesList({ resources, locale }: ResourcesListProps) {
   )
 
   // Only show the 'news' category
-  const activeCategories = groupedResources['news'] && groupedResources['news'].length > 0 ? ['news'] : []
+  const activeCategories: Category[] = groupedResources['news'] && groupedResources['news'].length > 0 ? ['news'] : []
 
   return (
     <section className="py-16 md:py-24 bg-white">
